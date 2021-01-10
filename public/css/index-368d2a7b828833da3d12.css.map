@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/index.scss"],"names":[],"mappings":"AAAA,OAAO,kBAAkB,6BAA6B,iBAAiB,iBAAiB,eAAe,OAAO,iBAAiB","file":"css/index-368d2a7b828833da3d12.css","sourcesContent":["button{border-radius:5px;background-color:springgreen;font-weight:bold;padding:2px 20px;cursor:pointer}.title{font-size:1.1rem;font-weight:bold}\n"],"sourceRoot":""}
