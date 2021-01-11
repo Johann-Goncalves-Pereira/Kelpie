@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./stylesheet/index.scss";
 import { Elm } from "./Main.elm";
 
 console.log(ENV);
