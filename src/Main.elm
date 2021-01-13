@@ -102,7 +102,7 @@ view model =
         ( title, body ) =
             Pages.view model.page model.shared
     in
-    { title = "Boilerplate - " ++ title
+    { title = "KELPIE - " ++ title
     , body = [ Html.map PagesMsg body ]
     }
 

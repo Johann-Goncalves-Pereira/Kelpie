@@ -1,12 +1,47 @@
-button {
-    border-radius: 5px;
-    background-color: springgreen;
-    font-weight: bold;
-    padding: 2px 20px;
-    cursor: pointer;
+* {
+    // set font
+
+    --background-black: #1c2021;
+    --background-black-grey: #242729;
+    --background-dark-grey: #303536;
+    --background-light-grey: #686f73;
+    --background-light: #f3ecde;
+    --background-white: #ffffff;
+
+    font-family: "Roboto", sans-serif;
+
+    color: var(--background-light);
 }
 
-.title {
-    font-size: 1.1rem;
-    font-weight: bold;
+.bodyElm {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-black-grey);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--background-light-grey);
+    border-radius: 8px;
+}
+
+// button {
+//     border-radius: 5px;
+//     background-color: springgreen;
+//     font-weight: bold;
+//     padding: 2px 20px;
+//     cursor: pointer;
+// }
+
+// .title {
+//     font-size: 1.1rem;
+//     font-weight: bold;
+// }
