@@ -69,16 +69,33 @@
     align-items: center;
     justify-content: space-between;
 }
-.centerHeader h2 {
+.centerHeader li {
+    list-style-type: none;
+}
+
+.centerHeader li h2 {
     font-size: 1rem;
 }
 
-.centerHeader a {
+.centerHeader li a {
     text-decoration: none;
     padding: 0 10px;
 }
 
-a:hover {
+.centerHeader li a:hover {
     color: var(--background-white);
     cursor: pointer;
+}
+
+.centerHeader li button {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.centerHeader li button img {
+    padding-top: 5px;
+
+    width: 1.5rem;
+    height: 1.5rem;
 }

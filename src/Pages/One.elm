@@ -1,7 +1,7 @@
 module Pages.One exposing (..)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html exposing (Html, a, button, div, h2, h3, header, img, input, li, text)
+import Html.Attributes exposing (alt, class, href, placeholder, src, type_)
 import Html.Events exposing (onClick, onInput)
 import Random
 import Route
@@ -9,6 +9,8 @@ import Shared
 import String exposing (String)
 import Svg
 import Svg.Attributes as SvgAttributes
+
+-- Svg.Attributes = SvgAttributes
 
 
 
@@ -110,19 +112,17 @@ headerPage model =
             , button [] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
             ]
         , div [ class "centerHeader" ]
-            [ h2 [] [ text "Home" ]
-            , a [ href "*brands" ] [ text "Brands" ]
-            , a [ href "*explore" ] [ text "Explore" ]
+            [ li [] [ h2 [] [ text "Home" ] ]
+            , li [] [ a [ href "*brands" ] [ text "Brands" ] ]
+            , li []
+                [ div []
+                    [ button [ type_ "image" ]
+                        [ img [ src "source/dots.svg", alt "..." ] [] ]
+                    ]
+                ]
             , button
-                [{--}
-                ]
-                [{- ... -}]
-            , button
-                [{--}
-                ]
-                [ {--}
-                  text "Submit Photo"
-                ]
+                []
+                [ text "Submit Photo" ]
             ]
         , div [ class "rightHeader" ]
             [ a [ href "*login" ] [ text "|" ]
