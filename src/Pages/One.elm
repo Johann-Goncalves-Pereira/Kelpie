@@ -1,7 +1,7 @@
 module Pages.One exposing (..)
 
-import Html exposing (Html, a, button, div, h2, h3, header, img, input, li, text)
-import Html.Attributes exposing (alt, class, href, placeholder, src, type_)
+import Html exposing (Html, a, button, div, h2, h3, header, img, input, li, nav, text)
+import Html.Attributes exposing (alt, class, href, id, placeholder, size, src, type_)
 import Html.Events exposing (onClick, onInput)
 import Random
 import Route
@@ -10,10 +10,9 @@ import String exposing (String)
 import Svg
 import Svg.Attributes as SvgAttributes
 
+
+
 -- Svg.Attributes = SvgAttributes
-
-
-
 ---------
 -- Msg --
 ---------
@@ -93,47 +92,79 @@ viewPage model shared =
 
 headerPage : Model -> Html Msg
 headerPage model =
-    header [ class "header" ]
-        [ div [ class "logoHeader" ]
-            [ img
-                [ src "source/logo.svg"
-                , alt "KELPIE"
+    header []
+        [ nav
+            [ class "header" ]
+            [ div [ class "search" ]
+                [ div [ class "logoHeader" ]
+                    [ img
+                        [ src "source/logo.svg"
+                        , alt "KELPIE"
+                        ]
+                        [ a [ href "http://localhost:8080/" ] [] ]
+                    ]
+                , button [ class "buttonSearch", type_ "submit", alt "Search" ]
+                    [ img [ src "source/search.svg" ] [] ]
+                , input [ placeholder "Search free high-resolution photos" ] []
+                , button [ class "buttonVisualSearch" ] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
                 ]
-                [ a [ href "http://localhost:8080/" ] [] ]
-            ]
-        , div [ class "search" ]
-            [ button [ type_ "submit", alt "Search" ]
-                [ img [ src "source/search.svg" ] [] ]
-            , input
-                [ type_ "text"
-                , placeholder "Search free high-resolution photos"
-                ]
-                []
-            , button [] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
-            ]
-        , div [ class "centerHeader" ]
-            [ li [] [ h2 [] [ text "Home" ] ]
-            , li [] [ a [ href "*brands" ] [ text "Brands" ] ]
-            , li []
-                [ div []
-                    [ button [ type_ "image" ]
-                        [ img [ src "source/dots.svg", alt "..." ] [] ]
+            , div [ class "centerHeader" ]
+                [ li [] [ h2 [] [ text "Home" ] ]
+
+                -- one more page
+                , li [] [ a [ href "*brands" ] [ text "Brands" ] ]
+                , li []
+                    [ div []
+                        [ button []
+                            [ img [ src "source/dots.svg", alt "..." ] [] ]
+                        ]
+                    ]
+                , li []
+                    [ div [ class "submitPhoto" ]
+                        [ button
+                            []
+                            [ text "Submit Photo" ]
+                        ]
                     ]
                 ]
-            , button
-                []
-                [ text "Submit Photo" ]
+            , div [ class "rightHeader" ]
+                [ div
+                    [ id "verticalLeft" ]
+                    [ button [] [ a [ href "*login" ] [ text "Login" ] ]
+                    , button [] [ a [ href "*join" ] [ text "Join Free" ] ]
+                    ]
+                ]
             ]
-        , div [ class "rightHeader" ]
-            [ a [ href "*login" ] [ text "|" ]
-            , a [ href "*login" ] [ text "Login" ]
-            , a [ href "*join" ] [ text "Join Free" ]
-            ]
-        , div []
-            [ h3 [] [ text "Tags" ]
-            , a [ href "#" ] [ text "|" ]
+        , div [ id "tags" ]
+            [ h3 [ id "verticalRight" ] [ text "Tags" ]
+            , li [ class " listTags" ]
+                [ a [ href "*/t/nameOfTag" ] [ text "People" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Film" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Movie" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Nature" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Dance" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Happy" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Food" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Romance" ]
+                , a [ href "*/t/nameOfTag" ] [ text "History" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Culture" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Animals" ]
+                , a [ href "*/t/nameOfTag" ] [ text "LGBTQ+" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Family" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Meme" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Country" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Offices" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Materialize" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Art" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Draw" ]
+                , a [ href "*/t/nameOfTag" ] [ text "Farm" ]
+                ]
             ]
         ]
+
+
+
+--
 
 
 imgDisplay : Model -> Html Msg
