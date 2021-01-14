@@ -1,14 +1,23 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+//  root of header
+header {
     background-color: var(--background-black-grey);
+    max-width: 100vw;
 }
 
-.logoHeader {
-    padding: 0 1rem;
+.header {
+    padding: 0 20px;
 
+    display: flex;
+    align-items: center;
+}
+
+// Logo / Search input
+
+.logoHeader {
+    padding: 10px 20px 10px 0;
+}
+
+.logoHeader img {
     width: 2.5rem;
     height: 2.5rem;
 }
@@ -19,8 +28,8 @@
 }
 
 .search button {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: auto;
+    height: 2.45rem;
 
     outline: none;
     border: none;
@@ -36,19 +45,19 @@
     height: 1.25rem;
 }
 
-.search button:first-child {
+.search button.buttonSearch {
     border-radius: 50% 0 0 50%;
 }
-.search button:first-child img {
+.search button.buttonSearch img {
     padding-left: 10px;
 }
 
-.search button:last-child {
+.search button.buttonVisualSearch {
     border-radius: 0 50% 50% 0;
 }
 
-.search button img {
-    padding-right: 10px;
+.search button.buttonVisualSearch img {
+    padding: 3px 10px 0 0;
 }
 
 .search input {
@@ -60,9 +69,26 @@
     background: var(--background-dark-grey);
     color: var(--background-light);
 
-    height: 2.5rem;
-    width: 50vw;
+    flex-grow: 1;
+    height: 2.4rem;
+    width: 42.5rem;
 }
+
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+.search:hover button {
+    background: var(--background-light-dark-grey);
+    transition: 200ms;
+}
+.search:hover input {
+    background: var(--background-light-dark-grey);
+    transition: 200ms;
+}
+
+// Page name / Brandis / ...[List]
 
 .centerHeader {
     display: flex;
@@ -74,7 +100,9 @@
 }
 
 .centerHeader li h2 {
+    padding: 0 0 0 10px;
     font-size: 1rem;
+    // name of page
 }
 
 .centerHeader li a {
@@ -88,9 +116,18 @@
 }
 
 .centerHeader li button {
+    margin: 0 10px 0 0px;
     border: none;
     background: none;
     outline: none;
+}
+.centerHeader li button:hover {
+    background: var(--background-dark-grey);
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: 200ms;
 }
 
 .centerHeader li button img {
@@ -98,4 +135,87 @@
 
     width: 1.5rem;
     height: 1.5rem;
+}
+
+.centerHeader .submitPhoto button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--background-dark-grey);
+}
+
+// Join / Login
+
+.rightHeader button:first-child {
+    background: none;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    height: 2rem;
+}
+
+.rightHeader button:last-child {
+    padding-left: 15px;
+
+    cursor: pointer;
+
+    background: var(--green);
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    height: 2rem;
+}
+.rightHeader a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    text-decoration: none;
+    padding: 0 10px 0 0px;
+    font-size: 1rem;
+}
+
+.rightHeader a:last-child {
+    color: var(--background-white);
+}
+
+#verticalLeft {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 2.3rem;
+
+    border-left: 1px solid var(--background-light-dark-grey);
+}
+
+// root of Tags
+
+#tags {
+    margin: 0 0 20px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h3#verticalRight {
+    padding: 0 20px 0 0;
+
+    border-right: 1px solid var(--background-light-dark-grey);
+    font-size: 00.9rem;
+}
+
+li.listTags {
+    list-style-type: none;
+}
+
+.listTags a {
+    margin: 0 10px;
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
 }
