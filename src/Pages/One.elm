@@ -1,6 +1,6 @@
 module Pages.One exposing (..)
 
-import Html exposing (Html, a, button, div, h2, h3, header, img, input, li, nav, text)
+import Html exposing (Html, a, button, div, form, h2, h3, header, img, input, li, nav, span, text, ul)
 import Html.Attributes exposing (alt, class, href, id, placeholder, size, src, type_)
 import Html.Events exposing (onClick, onInput)
 import Random
@@ -93,45 +93,61 @@ viewPage model shared =
 headerPage : Model -> Html Msg
 headerPage model =
     header []
-        [ nav
-            [ class "header" ]
-            [ div [ class "search" ]
-                [ div [ class "logoHeader" ]
-                    [ img
-                        [ src "source/logo.svg"
-                        , alt "KELPIE"
+        [ nav [ class "navTop" ]
+            -- Left Header
+            [ div [ class "logoAndSearch" ]
+                [ div [ class "search" ]
+                    [ a [ class "aLogo", href "http://localhost:8080/" ] [ img [ class "logoHeader", src "source/logo.svg", alt "KELPIE" ] [] ] ]
+                , div [ class "allSearchBar" ]
+                    [ form [ class "formSearch" ]
+                        [ button [ class "buttonSearch", type_ "submit", alt "Search" ] [ img [ src "source/search.svg" ] [] ]
+                        , div [ class "inputSearch" ]
+                            [ input [ class "_input", placeholder "Search free high-resolution photos" ] []
+                            , div [ class "react-autoWhatever" ] []
+                            ]
+                        , div [ class "VisualSearch" ]
+                            [ button [ class "buttonVisualSearch" ] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
+                            , div [] []
+                            ]
                         ]
-                        [ a [ href "http://localhost:8080/" ] [] ]
                     ]
-                , button [ class "buttonSearch", type_ "submit", alt "Search" ]
-                    [ img [ src "source/search.svg" ] [] ]
-                , input [ placeholder "Search free high-resolution photos" ] []
-                , button [ class "buttonVisualSearch" ] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
                 ]
-            , div [ class "centerHeader" ]
-                [ li [] [ h2 [] [ text "Home" ] ]
 
-                -- one more page
-                , li [] [ a [ href "*brands" ] [ text "Brands" ] ]
-                , li []
-                    [ div []
-                        [ button []
-                            [ img [ src "source/dots.svg", alt "..." ] [] ]
+            -- Center Header
+            , div [ class "centerHeader" ]
+                [ ul [ class "ulHeader" ]
+                    -- Name of Page
+                    [ li [ class "liNamePage" ]
+                        [ a [ class "aNamePage" ] [ h2 [] [ text "Home" ] ]
+                        ]
+                    , li [ class "liBrands" ]
+                        [ a [ class "aBrands", href "/brands" ]
+                            [ div [] [ text "Brands", span [ class "spanBrands" ] [ text "New" ] ] ]
+                        ]
+                    , li [ class "liDots" ]
+                        [ div [ class "divDots" ]
+                            [ button [ class "buttonDots" ]
+                                [ img [ src "source/dots.svg", alt "..." ] [] ]
+                            , div [] []
+                            ]
                         ]
                     ]
-                , li []
+                ]
+
+            -- Right Header
+            , div [ class "rightHeader" ]
+                [ div []
                     [ div [ class "submitPhoto" ]
                         [ button
-                            []
-                            [ text "Submit Photo" ]
+                            [ class "buttonSubmitPhoto" ]
+                            [ a [ id "aSubmitPhoto", href "/Login" ] [ text "Submit Photo" ] ]
+                        , div [] []
                         ]
                     ]
-                ]
-            , div [ class "rightHeader" ]
-                [ div
+                , div
                     [ id "verticalLeft" ]
-                    [ button [] [ a [ href "*login" ] [ text "Login" ] ]
-                    , button [] [ a [ href "*join" ] [ text "Join Free" ] ]
+                    [ button [ class "buttonLogin" ] [ a [ class "aLogin", href "/Login" ] [ text "Login" ] ]
+                    , button [ class "buttonJoin" ] [ a [ class "aJoin", href "/Login" ] [ text "Join Free" ] ]
                     ]
                 ]
             ]
