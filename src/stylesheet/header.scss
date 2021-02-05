@@ -14,7 +14,6 @@ header {
 #tags {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .navTop {
@@ -29,7 +28,8 @@ header {
     margin-left: 1rem;
 
     flex: 1;
-    max-width: 56vw;
+    // width: -webkit-fill-available;
+    width: 100%;
 }
 
 // logo
@@ -206,13 +206,18 @@ input._input {
     color: var(--background-white);
     cursor: pointer;
 }
-.spanBrands {
-    font-size: 0.6rem;
+.divBrands span {
+    -webkit-background-clip: text;
 
-    background-image: linear-gradient(94deg, #ff0000, #0006ce);
+    color: transparent;
+}
+.spanBrands {
+    position: relative;
+    top: -10px;
+    font-size: 0.6rem;
     background-color: initial;
-    background-clip: text;
-    box-decoration-break: clone;
+
+    background: -webkit-linear-gradient(45deg, #ff0000, #2c33ff);
 
     -webkit-text-fill-color: transparent;
 }
@@ -279,6 +284,11 @@ input._input {
     background-color: var(--background-black-grey);
     border: 2px solid var(--background-dark-grey);
 }
+.buttonSubmitPhoto:hover {
+    background: var(--background-dark-grey);
+
+    transition: 200ms;
+}
 #aSubmitPhoto {
     padding: 0.625rem;
 
@@ -292,7 +302,7 @@ input._input {
     border-left: 1px solid var(--background-light-dark-grey);
 }
 .buttonLogin {
-    margin: 0 1rem 0 0;
+    margin: 0 1rem;
 
     background: none;
     outline: none;
@@ -333,30 +343,49 @@ input._input {
 // root of Tags
 
 #tags {
-    padding: 0 0 0 0.75rem;
-
     background-color: var(--background-black-grey);
+
+    height: 3rem;
 }
 
-h3#verticalRight {
-    padding: 0 20px 0 0;
-
-    border-right: 1px solid var(--background-light-dark-grey);
-    font-size: 00.9rem;
-}
-
-li.listTags {
-    list-style-type: none;
-}
-
-.listTags a {
-    margin: 0 10px;
-
-    text-decoration: none;
+h3#h3Tags {
+    display: flex;
+    margin: 0;
+    padding: 0.9rem;
 
     font-size: 0.9rem;
 }
+.verticalRight {
+    padding: 1rem 0;
 
-.listTags a:last-child {
-    margin-right: 30px;
+    border-right: 1px solid var(--background-light-dark-grey);
+}
+
+.tagsStyle {
+    font-size: 0.9rem;
+
+    width: 100%;
+}
+
+.ulTags {
+    margin-bottom: 0;
+    margin-top: 0;
+
+    // margin-left: -32px;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 0;
+    list-style: none;
+}
+
+.liTag {
+    padding: 0.9rem;
+    width: 100%;
+    height: 100%;
+}
+
+.liTag a {
+    text-decoration: none;
 }

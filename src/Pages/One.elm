@@ -1,14 +1,11 @@
 module Pages.One exposing (..)
 
-import Html exposing (Html, a, button, div, form, h2, h3, header, img, input, li, nav, span, text, ul)
-import Html.Attributes exposing (alt, class, href, id, placeholder, size, src, type_)
-import Html.Events exposing (onClick, onInput)
-import Random
+import Html exposing (Html, a, button, div, form, h2, h3, h4, header, img, input, li, nav, span, text, ul)
+import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
+import Html.Events exposing (onClick)
 import Route
 import Shared
 import String exposing (String)
-import Svg
-import Svg.Attributes as SvgAttributes
 
 
 
@@ -122,7 +119,7 @@ headerPage model =
                         ]
                     , li [ class "liBrands" ]
                         [ a [ class "aBrands", href "/brands" ]
-                            [ div [] [ text "Brands", span [ class "spanBrands" ] [ text "New" ] ] ]
+                            [ div [ class "divBrands" ] [ h4 [] [ text "Brands", span [ class "spanBrands" ] [ text "New" ] ] ] ]
                         ]
                     , li [ class "liDots" ]
                         [ div [ class "divDots" ]
@@ -152,28 +149,33 @@ headerPage model =
                 ]
             ]
         , div [ id "tags" ]
-            [ h3 [ id "verticalRight" ] [ text "Tags" ]
-            , li [ class " listTags" ]
-                [ a [ href "*/t/nameOfTag" ] [ text "People" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Film" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Movie" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Nature" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Dance" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Happy" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Food" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Romance" ]
-                , a [ href "*/t/nameOfTag" ] [ text "History" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Culture" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Animals" ]
-                , a [ href "*/t/nameOfTag" ] [ text "LGBTQ+" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Family" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Meme" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Country" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Offices" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Materialize" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Art" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Draw" ]
-                , a [ href "*/t/nameOfTag" ] [ text "Farm" ]
+            [ h3 [ id "h3Tags" ] [ text "Tags" ]
+            , div [ class "verticalRight" ] []
+            , div [ class " tagsStyle" ]
+                [ ul [ class "ulTags" ]
+                    [ li [ class "liTag" ] [ a [ href "*/t/Wallpaper" ] [ text "Wallpaper" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/People" ] [ text "People" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Film" ] [ text "Film" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Movie" ] [ text "Movie" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Nature" ] [ text "Nature" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Dance" ] [ text "Dance" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Happy" ] [ text "Happy" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Food" ] [ text "Food" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Romance" ] [ text "Romance" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/History" ] [ text "History" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Culture" ] [ text "Culture" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Animals" ] [ text "Animals" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/LGBTQ" ] [ text "LGBTQ+" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Family" ] [ text "Family" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Meme" ] [ text "Meme" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Country" ] [ text "Country" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Offices" ] [ text "Offices" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Materialize" ] [ text "Materialize" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Art" ] [ text "Art" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/Draw" ] [ text "Draw" ] ]
+                    , li [ class "liTag" ] [ a [ href "*/t/text" ] [ text "Farm" ] ]
+                    ]
+               
                 ]
             ]
         ]
