@@ -175,7 +175,6 @@ headerPage model =
                     , li [ class "liTag" ] [ a [ href "*/t/Draw" ] [ text "Draw" ] ]
                     , li [ class "liTag" ] [ a [ href "*/t/text" ] [ text "Farm" ] ]
                     ]
-               
                 ]
             ]
         ]
@@ -187,11 +186,21 @@ headerPage model =
 
 imgDisplay : Model -> Html Msg
 imgDisplay model =
-    div [ class "imgs" ]
-        [ img [ src "images/01.jpeg" ] []
-        , img [ src "images/02.jpeg" ] []
-        , img [ src "images/03.jpeg" ] []
-        , img [ src "images/04.jpeg" ] []
+    div [ class "imgDisplay" ]
+        [ div [ class "imgDisplayVerticalOne" ]
+            [ div [ class "imgs" ]
+                [ img [ src "images/01.jpeg" ] [] ]
+            ]
+        , div [ class "imgDisplayVerticalTwo" ]
+            [ div [ class "imgs" ]
+                [ img [ src "images/02.jpeg" ] [] ]
+            ]
+        , div [ class "imgDisplayVerticalThree" ]
+            [ div [ class "imgs" ]
+                [ img [ src "images/03.jpeg" ] []
+                , img [ src "images/04.jpeg" ] []
+                ]
+            ]
         ]
 
 
