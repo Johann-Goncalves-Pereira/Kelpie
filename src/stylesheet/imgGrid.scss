@@ -1,0 +1,16 @@
+.imgDisplay {
+    margin: 3rem 10%;
+    display: flex;
+}
+
+.imgDisplayVertical {
+    margin: 0 1rem;
+    display: table-column;
+}
+
+.displayImgs {
+    margin: 1rem 0;
+    border-radius: 8px;
+    max-width: 30rem;
+    height: auto;
+}
