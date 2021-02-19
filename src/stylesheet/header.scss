@@ -84,6 +84,7 @@ input._input {
     background: var(--background-dark-grey);
     color: var(--background-light);
 }
+
 ._input {
     flex-grow: 1;
 
@@ -207,7 +208,7 @@ input._input {
     cursor: pointer;
 }
 .divBrands span {
-    -webkit-background-clip: text;
+    background-clip: text;
 
     color: transparent;
 }
@@ -339,13 +340,26 @@ input._input {
 
     color: var(--background-white);
 }
+$breakpoint-tiny-computer-screen: 950px;
+@media (max-width: $breakpoint-tiny-computer-screen) {
+    .liNamePage,
+    .buttonLogin,
+    .liBrands,
+    .buttonSubmitPhoto {
+        display: none;
+    }
+}
 
 // root of Tags
+$breakpoint-small-computer-screen: 1595px;
 
 #tags {
     background-color: var(--background-black-grey);
 
     height: 3rem;
+
+    transition: 2s;
+    transition-duration: 2s;
 }
 
 h3#h3Tags {
@@ -384,8 +398,21 @@ h3#h3Tags {
     padding: 0.9rem;
     width: 100%;
     height: 100%;
+
+    display: flex;
+    justify-content: space-around;
 }
 
 .liTag a {
     text-decoration: none;
+}
+
+@media (max-width: $breakpoint-small-computer-screen) {
+    #tags {
+        transition-duration: 2s;
+        width: 0;
+        height: 0;
+        display: none;
+    }
+    
 }

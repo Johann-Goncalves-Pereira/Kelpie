@@ -99,6 +99,11 @@ headerPage model =
                     [ form [ class "formSearch" ]
                         [ button [ class "buttonSearch", type_ "submit", alt "Search" ] [ img [ src "source/search.svg" ] [] ]
                         , div [ class "inputSearch" ]
+                            -- I need to make this but in elm
+                            -- if ($(window).width() < 400 ) {
+                            -- $("input[type='email']").attr("placeholder","join our newsletter");
+                            -- }
+                            -- else { $("input[type='email']").attr("placeholder","your email");}
                             [ input [ class "_input", placeholder "Search free high-resolution photos" ] []
                             , div [ class "react-autoWhatever" ] []
                             ]
@@ -175,7 +180,6 @@ headerPage model =
                     , li [ class "liTag" ] [ a [ href "*/t/Draw" ] [ text "Draw" ] ]
                     , li [ class "liTag" ] [ a [ href "*/t/text" ] [ text "Farm" ] ]
                     ]
-               
                 ]
             ]
         ]
@@ -187,11 +191,44 @@ headerPage model =
 
 imgDisplay : Model -> Html Msg
 imgDisplay model =
-    div [ class "imgs" ]
-        [ img [ src "images/01.jpeg" ] []
-        , img [ src "images/02.jpeg" ] []
-        , img [ src "images/03.jpeg" ] []
-        , img [ src "images/04.jpeg" ] []
+    div [ class "imgDisplay" ]
+        [ div [ class "imgDisplayVertical" ]
+            --  I need to make this three columns torn in to 2 and 1
+            [ img [ class "displayImgs", src "images/001.jpg" ] []
+            , img [ class "displayImgs", src "images/004.jpg" ] []
+            , img [ class "displayImgs", src "images/003.jpg" ] []
+            , img [ class "displayImgs", src "images/008.jpg" ] []
+            , img [ class "displayImgs", src "images/005.jpg" ] []
+            , img [ class "displayImgs", src "images/002.jpg" ] []
+            , img [ class "displayImgs", src "images/006.jpg" ] []
+            , img [ class "displayImgs", src "images/007.jpg" ] []
+            , img [ class "displayImgs", src "images/010.jpg" ] []
+            , img [ class "displayImgs", src "images/009.jpg" ] []
+            ]
+        , div [ class "imgDisplayVertical" ]
+            [ img [ class "displayImgs", src "images/002.jpg" ] []
+            , img [ class "displayImgs", src "images/001.jpg" ] []
+            , img [ class "displayImgs", src "images/005.jpg" ] []
+            , img [ class "displayImgs", src "images/008.jpg" ] []
+            , img [ class "displayImgs", src "images/003.jpg" ] []
+            , img [ class "displayImgs", src "images/009.jpg" ] []
+            , img [ class "displayImgs", src "images/004.jpg" ] []
+            , img [ class "displayImgs", src "images/006.jpg" ] []
+            , img [ class "displayImgs", src "images/010.jpg" ] []
+            , img [ class "displayImgs", src "images/007.jpg" ] []
+            ]
+        , div [ class "imgDisplayVertical" ]
+            [ img [ class "displayImgs", src "images/003.jpg" ] []
+            , img [ class "displayImgs", src "images/004.jpg" ] []
+            , img [ class "displayImgs", src "images/001.jpg" ] []
+            , img [ class "displayImgs", src "images/007.jpg" ] []
+            , img [ class "displayImgs", src "images/010.jpg" ] []
+            , img [ class "displayImgs", src "images/006.jpg" ] []
+            , img [ class "displayImgs", src "images/007.jpg" ] []
+            , img [ class "displayImgs", src "images/002.jpg" ] []
+            , img [ class "displayImgs", src "images/005.jpg" ] []
+            , img [ class "displayImgs", src "images/007.jpg" ] []
+            ]
         ]
 
 
