@@ -99,6 +99,11 @@ headerPage model =
                     [ form [ class "formSearch" ]
                         [ button [ class "buttonSearch", type_ "submit", alt "Search" ] [ img [ src "source/search.svg" ] [] ]
                         , div [ class "inputSearch" ]
+                            -- I need to make this but in elm
+                            -- if ($(window).width() < 400 ) {
+                            -- $("input[type='email']").attr("placeholder","join our newsletter");
+                            -- }
+                            -- else { $("input[type='email']").attr("placeholder","your email");}
                             [ input [ class "_input", placeholder "Search free high-resolution photos" ] []
                             , div [ class "react-autoWhatever" ] []
                             ]
@@ -188,6 +193,7 @@ imgDisplay : Model -> Html Msg
 imgDisplay model =
     div [ class "imgDisplay" ]
         [ div [ class "imgDisplayVertical" ]
+            --  I need to make this three columns torn in to 2 and 1
             [ img [ class "displayImgs", src "images/001.jpg" ] []
             , img [ class "displayImgs", src "images/004.jpg" ] []
             , img [ class "displayImgs", src "images/003.jpg" ] []
