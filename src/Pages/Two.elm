@@ -1,8 +1,8 @@
 module Pages.Two exposing (..)
 
 import Browser.Navigation as Nav
-import Html exposing (Html, button, div, text)
-import Html.Attributes exposing (class)
+import Html exposing (Html, a, button, div, h2, img, input, p, span, text)
+import Html.Attributes exposing (alt, class, id, src)
 import Html.Events exposing (onClick)
 import Route
 import Shared
@@ -78,23 +78,32 @@ update msg model shared =
 
 view : Model -> Shared.Model -> ( String, Html Msg )
 view model shared =
-    ( "Página 2"
+    ( "Login"
     , viewPage model shared
     )
 
 
 viewPage : Model -> Shared.Model -> Html Msg
 viewPage model shared =
-    div []
-        [ div [ class "title" ] [ text "Contador local: " ]
-        , button [ onClick Increment ] [ text "+" ]
-        , div [] [ text <| String.fromInt model.counter ]
-        , button [ onClick Decrement ] [ text "-" ]
-        , div [ class "title" ] [ text "Quantidade de letras da palavra da Shared: " ]
-        , button [ onClick IncrementShared ] [ text "+" ]
-        , div [] [ text <| String.fromInt <| String.length shared.textField ]
-        , button [ onClick DecrementShared ] [ text "-" ]
-        , div []
-            [ button [ onClick GoToPage1 ] [ text "Go to page 1!" ]
+    div [ class "bodyElm" ]
+        [ div [ class "loginContainer" ]
+            [ div [ class "loginBlock" ]
+                [ div [ id "loginStatic" ]
+                    [ img [ src "source/logo.svg", alt "Logo" ] []
+                    , h2 [] [ text "Login" ]
+                    , p [] [ text "Welcome Back" ]
+                    ]
+                , button [] [ text "Login with Facebook" ]
+                , button [] [ text "Login with Google" ]
+                , p [] [ text "or" ]
+                , span [] [ text "Email" ]
+                , input [] []
+                , span [] [ text "Password" ]
+                , a [] [ text "Welcome Back" ]
+                , input [] []
+                , button [] [ text "Login" ]
+                , p [] [ text "Don't have an account?" ]
+                , a [] [ text "join" ]
+                ]
             ]
         ]
