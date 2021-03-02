@@ -216,11 +216,23 @@ input._input {
     position: relative;
     top: -10px;
     font-size: 0.6rem;
-    background-color: initial;
 
-    background: -webkit-linear-gradient(45deg, #ff0000, #2c33ff);
+    /* Fallback: Set a background color. */
+    background-color: red;
 
+    /* Create the gradient. */
+    background-image: linear-gradient(45deg, #ff0000, #2c33ff);
+
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
 
 // dots ...[list]
@@ -403,10 +415,6 @@ h3#h3Tags {
     justify-content: space-around;
 }
 
-.liTag a {
-    text-decoration: none;
-}
-
 @media (max-width: $breakpoint-small-computer-screen) {
     #tags {
         transition-duration: 2s;
@@ -414,5 +422,4 @@ h3#h3Tags {
         height: 0;
         display: none;
     }
-    
 }
