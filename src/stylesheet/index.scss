@@ -1,6 +1,11 @@
 * {
     // set font
+    font-family: "Roboto", sans-serif;
 
+    color: var(--background-light);
+}
+
+:root {
     --background-black: #1c2021;
     --background-black-grey: #242729;
     --background-dark-grey: #303536;
@@ -8,12 +13,7 @@
     --background-light-grey: #686f73;
     --background-light: #f3ecde;
     --background-white: #ffffff;
-
     --green: #00d079;
-
-    font-family: "Roboto", sans-serif;
-
-    color: var(--background-light);
 }
 
 .bodyElm {
@@ -22,6 +22,10 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 ::-webkit-scrollbar {
