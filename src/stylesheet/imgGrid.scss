@@ -1,18 +1,17 @@
-.imgDisplay {
+.imgContainer {
     margin: 3rem 10%;
     display: flex;
 }
 
-.imgDisplayVertical {
-    margin: 0 1rem;
-    display: table-column;
+.imgGrid {
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.displayImgs {
-    margin: 1rem 0;
+.photo > img {
     border-radius: 8px;
 
     width: 100%;
     max-width: 30rem;
-    
 }

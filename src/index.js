@@ -1,6 +1,8 @@
 import "./stylesheet/index.scss";
 import "./stylesheet/header.scss";
-import "./stylesheet/imgGrid.scss"
+import "./stylesheet/imgGrid.scss";
+import "./stylesheet/login.scss";
+
 import { Elm } from "./Main.elm";
 
 console.log(ENV);

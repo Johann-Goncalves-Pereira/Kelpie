@@ -1,0 +1,44 @@
+.loginContainer {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+
+    background: var(--background-black);
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+
+.loginBlock {
+    background: var(--background-black-grey);
+    display: grid;
+
+    height: 65%;
+    width: 50%;
+    margin: auto;
+
+    border-radius: 8px;
+}
+
+.loginBlock #loginStatic {
+    width: 100%;
+}
+
+.loginBlock #loginStatic > img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 2rem auto;
+    display: flex;
+}
+
+.loginBlock #loginStatic > h2 {
+    width: 4rem;
+    display: flex;
+    margin: auto;
+}
+.loginBlock #loginStatic > p {
+    width: 6.75rem;
+    display: flex;
+    margin: 0.5rem auto;
+    // transform: translateX(-50%);
+}

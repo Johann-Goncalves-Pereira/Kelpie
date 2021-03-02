@@ -29,12 +29,14 @@ type Msg
 
 type alias Model =
     { textField : String
+    , columns : List Int
     }
 
 
 init : Model
 init =
     { textField = ""
+    , columns = []
     }
 
 
@@ -148,8 +150,8 @@ headerPage model =
                     ]
                 , div
                     [ id "verticalLeft" ]
-                    [ button [ class "buttonLogin" ] [ a [ class "aLogin", href "/Login" ] [ text "Login" ] ]
-                    , button [ class "buttonJoin" ] [ a [ class "aJoin", href "/Login" ] [ text "Join Free" ] ]
+                    [ button [ class "buttonLogin" ] [ a [ class "aLogin", href "Login" ] [ text "Login" ] ]
+                    , button [ class "buttonJoin" ] [ a [ class "aJoin", href "Login" ] [ text "Join Free" ] ]
                     ]
                 ]
             ]
@@ -191,147 +193,49 @@ headerPage model =
 
 imgDisplay : Model -> Html Msg
 imgDisplay model =
-    div [ class "imgDisplay" ]
-        [ div [ class "imgDisplayVertical" ]
-            --  I need to make this three columns torn in to 2 and 1
-            [ img [ class "displayImgs", src "images/001.jpg" ] []
-            , img [ class "displayImgs", src "images/004.jpg" ] []
-            , img [ class "displayImgs", src "images/003.jpg" ] []
-            , img [ class "displayImgs", src "images/008.jpg" ] []
-            , img [ class "displayImgs", src "images/005.jpg" ] []
-            , img [ class "displayImgs", src "images/002.jpg" ] []
-            , img [ class "displayImgs", src "images/006.jpg" ] []
-            , img [ class "displayImgs", src "images/007.jpg" ] []
-            , img [ class "displayImgs", src "images/010.jpg" ] []
-            , img [ class "displayImgs", src "images/009.jpg" ] []
-            ]
-        , div [ class "imgDisplayVertical" ]
-            [ img [ class "displayImgs", src "images/002.jpg" ] []
-            , img [ class "displayImgs", src "images/001.jpg" ] []
-            , img [ class "displayImgs", src "images/005.jpg" ] []
-            , img [ class "displayImgs", src "images/008.jpg" ] []
-            , img [ class "displayImgs", src "images/003.jpg" ] []
-            , img [ class "displayImgs", src "images/009.jpg" ] []
-            , img [ class "displayImgs", src "images/004.jpg" ] []
-            , img [ class "displayImgs", src "images/006.jpg" ] []
-            , img [ class "displayImgs", src "images/010.jpg" ] []
-            , img [ class "displayImgs", src "images/007.jpg" ] []
-            ]
-        , div [ class "imgDisplayVertical" ]
-            [ img [ class "displayImgs", src "images/003.jpg" ] []
-            , img [ class "displayImgs", src "images/004.jpg" ] []
-            , img [ class "displayImgs", src "images/001.jpg" ] []
-            , img [ class "displayImgs", src "images/007.jpg" ] []
-            , img [ class "displayImgs", src "images/010.jpg" ] []
-            , img [ class "displayImgs", src "images/006.jpg" ] []
-            , img [ class "displayImgs", src "images/007.jpg" ] []
-            , img [ class "displayImgs", src "images/002.jpg" ] []
-            , img [ class "displayImgs", src "images/005.jpg" ] []
-            , img [ class "displayImgs", src "images/007.jpg" ] []
+    div [ class "imgContainer" ]
+        [ div [ class "imgGrid" ]
+            [ div [ class "imgColumns" ]
+                --  I need to make this three columns torn in to 2 and 1
+                [ div [ class "photo" ] [ img [ src "images/001.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/003.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/008.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/005.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/002.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/006.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/007.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/010.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/009.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/003.jpg" ] [] ]
+                ]
+            , div [ class "imgColumns" ]
+                [ div [ class "photo" ] [ img [ src "images/004.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/001.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/007.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/010.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/006.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/007.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/002.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/005.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/007.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/002.jpg" ] [] ]
+                ]
+            , div [ class "imgColumns" ]
+                [ div [ class "photo" ] [ img [ src "images/007.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/005.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/008.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/009.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/004.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/003.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/006.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/001.jpg" ] [] ]
+                , div [ class "photo" ] [ img [ src "images/010.jpg" ] [] ]
+                ]
             ]
         ]
 
 
 
-{- module Pages.One exposing (..)
-
-
-
-
-
-   ---------
-   -- Msg --
-   ---------
-
-
-   type Msg
-       = SrcOfImg
-       | NameTags
-
-
-
-   --    | GoToPage2
-   -----------
-   -- Model --
-   -----------
-
-
-   type alias Model =
-       { images : List String
-       , topbar : TopBar
-       }
-
-
-   type alias TopBar =
-       { searchBar : String
-       , login : String
-       , tags : List String
-       }
-
-
-   init : Model
-   init =
-       { images = []
-       , topbar =
-           { searchBar = ""
-           , login = ""
-           , tags = []
-           }
-       }
-
-
-
-   ------------
-   -- Update --
-   ------------
-
-
-   update : Msg -> Model -> Model
-   update msg model =
-       case msg of
-           SrcOfImg ->
-               { model | images = [] }
-
-           NameTags ->
-               let
-                   tb =
-                       model.topbar
-
-                   tbNew =
-                       { tb | tags = [] }
-               in
-               { model | topbar = tbNew }
-
-
-
-   {-
-      imgPath : Model -> Model
-      imgPath path =
-          let
-              ph =
-                  "./images/"
-
-              -- *.png
-              -- *.jpg
-              -- *.jpeg
-          in
-          { path | images = [ ph, ph, ph ] }
-
-
-      roll : Random.Generator Int
-      roll =
-          Random.int 1 4
-   -}
-
-   ----------
-   -- View --
-   ----------
-
-
-   view : Model -> Html Msg
-   view model =
-       div []
-           [ headerPage model
-           , imgDisplay model
-           ]
--}
+-- imageColumns : Model -> Html Msg
+-- imageColumns model =
+-- div [] []

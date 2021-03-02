@@ -35,7 +35,7 @@ matchers : Parser (Route -> a) a
 matchers =
     oneOf
         [ Parser.map Page1 top
-        , Parser.map Page2 (s "page-2")
+        , Parser.map Page2 (s "Login")
         , Parser.map NotFound (s "nao-encontrada")
         ]
 
@@ -85,7 +85,7 @@ routeToString page =
                     [ "" ]
 
                 Page2 ->
-                    [ "page-2" ]
+                    [ "Login" ]
 
                 NotFound ->
                     [ "nao-encontrada" ]
