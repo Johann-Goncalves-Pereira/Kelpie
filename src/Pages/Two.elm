@@ -2,9 +2,9 @@ module Pages.Two exposing (..)
 
 import Browser.Navigation as Nav
 import Html exposing (Html, a, button, div, h2, img, input, p, span, text)
-import Html.Attributes exposing (alt, class, id, src)
+import Html.Attributes exposing (alt, class, id, minlength, src, type_)
 import Html.Events exposing (onClick)
-import Route
+import Route exposing (href)
 import Shared
 
 
@@ -88,22 +88,21 @@ viewPage model shared =
     div [ class "bodyElm" ]
         [ div [ class "loginContainer" ]
             [ div [ class "loginBlock" ]
-                [ div [ id "loginStatic" ]
+                [ div [ class "loginStatic" ]
                     [ img [ src "source/logo.svg", alt "Logo" ] []
                     , h2 [] [ text "Login" ]
                     , p [] [ text "Welcome Back" ]
                     ]
-                , button [] [ text "Login with Facebook" ]
-                , button [] [ text "Login with Google" ]
-                , p [] [ text "or" ]
-                , span [] [ text "Email" ]
-                , input [] []
-                , span [] [ text "Password" ]
+                , div [ class "automaticLogin", class "grid-row" ]
+                    [ a [] [ img [ id "comercialLogo", src "source/facebook.svg" ] [], text "Login with Facebook" ]
+                    , a [] [ img [ id "comercialLogo", src "source/google.svg" ] [], text "Login with Google" ]
+                    ]
+                , p [ id "or" ] [ text "or" ]
+                , span [] [ text "Email", input [] [] ]
+                , span [] [ text "Password", input [ minlength 8, type_ "password" ] [] ]
                 , a [] [ text "Welcome Back" ]
-                , input [] []
                 , button [] [ text "Login" ]
-                , p [] [ text "Don't have an account?" ]
-                , a [] [ text "join" ]
+                , p [ id "justJoin" ] [ text "Don't have an account?", a [] [ text "Join" ] ]
                 ]
             ]
         ]
