@@ -5,7 +5,6 @@ import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
 import Html.Events exposing (onClick)
 import Route
 import Shared
-import String exposing (String)
 
 
 
