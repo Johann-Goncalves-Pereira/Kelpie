@@ -17,7 +17,7 @@ import Shared
 type Msg
     = InputTextField String
     | InputShared String
-    | GoToPage2
+    | GoToLogin
 
 
 
@@ -57,7 +57,7 @@ update msg model shared =
         InputShared text ->
             ( model, Cmd.none, Shared.UpdateTextField text )
 
-        GoToPage2 ->
+        GoToLogin ->
             ( model, Route.pushUrl shared.key Route.Page2, Shared.NoOp )
 
 
@@ -84,7 +84,7 @@ viewPage model shared =
     div [ class "bodyElm" ]
         [ headerPage model
         , imgDisplay model
-        , button [ onClick GoToPage2 ] [ text "Go to page 2!" ]
+        , button [ onClick GoToLogin ] [ text "Go to page 2!" ]
         ]
 
 
@@ -143,14 +143,14 @@ headerPage model =
                     [ div [ class "submitPhoto" ]
                         [ button
                             [ class "buttonSubmitPhoto" ]
-                            [ a [ id "aSubmitPhoto", href "/Login" ] [ text "Submit Photo" ] ]
+                            [ a [ id "aSubmitPhoto" ] [ text "Submit Photo" ] ]
                         , div [] []
                         ]
                     ]
                 , div
                     [ id "verticalLeft" ]
-                    [ button [ class "buttonLogin" ] [ a [ class "aLogin", href "Login" ] [ text "Login" ] ]
-                    , button [ class "buttonJoin" ] [ a [ class "aJoin", href "Login" ] [ text "Join Free" ] ]
+                    [ button [ class "buttonLogin", onClick GoToLogin ] [ text "Login" ]
+                    , button [ class "buttonJoin", onClick GoToLogin ] [ text "Join Free" ]
                     ]
                 ]
             ]
