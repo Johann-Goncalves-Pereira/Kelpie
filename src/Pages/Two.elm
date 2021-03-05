@@ -1,10 +1,11 @@
 module Pages.Two exposing (..)
 
-import Browser.Navigation as Nav
+-- import Browser.Navigation as Nav
+
 import Html exposing (Html, a, button, div, h2, img, input, p, span, text)
-import Html.Attributes exposing (alt, class, id, minlength, src, type_)
-import Html.Events exposing (onClick)
-import Route exposing (href)
+import Html.Attributes exposing (alt, class, id, minlength, src, type_, value)
+import Html.Events exposing (onClick, onInput)
+import Route
 import Shared
 
 
@@ -15,27 +16,31 @@ import Shared
 
 
 type Msg
-    = Increment
-    | Decrement
-    | IncrementShared
-    | DecrementShared
-    | GoToPage1
+    = EmailField String
+    | PasswordField String
+    | GoToHomePage
 
 
 
 -----------
 -- Model --
 -----------
+-- email password
+-- make a msg that save the String of email input
 
 
 type alias Model =
-    { counter : Int
+    { emailField : String
+    , passwordField : String
+    , columns : List Int
     }
 
 
 init : Model
 init =
-    { counter = 0
+    { emailField = ""
+    , passwordField = ""
+    , columns = []
     }
 
 
@@ -48,25 +53,19 @@ init =
 update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
 update msg model shared =
     case msg of
-        Increment ->
-            ( { model | counter = model.counter + 1 }, Cmd.none, Shared.NoOp )
-
-        Decrement ->
-            ( { model | counter = model.counter - 1 }, Cmd.none, Shared.NoOp )
-
-        IncrementShared ->
-            ( model
+        EmailField text ->
+            ( { model | emailField = text }
             , Cmd.none
-            , Shared.UpdateTextField <| shared.textField ++ "+"
+            , Shared.NoOp
             )
 
-        DecrementShared ->
-            ( model
+        PasswordField password ->
+            ( { model | passwordField = password }
             , Cmd.none
-            , Shared.UpdateTextField <| String.left (String.length shared.textField - 1) shared.textField
+            , Shared.NoOp
             )
 
-        GoToPage1 ->
+        GoToHomePage ->
             ( model, Route.pushUrl shared.key Route.Page1, Shared.NoOp )
 
 
@@ -89,20 +88,61 @@ viewPage model shared =
         [ div [ class "loginContainer" ]
             [ div [ class "loginBlock" ]
                 [ div [ class "loginStatic" ]
-                    [ img [ src "source/logo.svg", alt "Logo" ] []
+                    [ img
+                        [ src "source/logo.svg"
+                        , alt "Logo"
+                        ]
+                        []
                     , h2 [] [ text "Login" ]
                     , p [] [ text "Welcome Back" ]
                     ]
-                , div [ class "automaticLogin", class "grid-row" ]
-                    [ a [] [ img [ id "comercialLogo", src "source/facebook.svg" ] [], text "Login with Facebook" ]
-                    , a [] [ img [ id "comercialLogo", src "source/google.svg" ] [], text "Login with Google" ]
+                , div
+                    [ class "automaticLogin"
+                    , class "grid-row"
+                    ]
+                    [ a []
+                        [ img
+                            [ id "comercialLogo"
+                            , src "source/facebook.svg"
+                            ]
+                            []
+                        , text "Login with Facebook"
+                        ]
+                    , a []
+                        [ img
+                            [ id "comercialLogo"
+                            , src "source/google.svg"
+                            ]
+                            []
+                        , text "Login with Google"
+                        ]
                     ]
                 , p [ id "or" ] [ text "or" ]
-                , span [] [ text "Email", input [] [] ]
-                , span [] [ text "Password", input [ minlength 8, type_ "password" ] [] ]
+                , span []
+                    [ text "Email"
+                    , input
+                        [ type_ "text"
+                        , value model.emailField
+                        , onInput EmailField
+                        ]
+                        []
+                    ]
+                , span []
+                    [ text "Password"
+                    , input
+                        [ minlength 8
+                        , type_ "password"
+                        , value model.passwordField
+                        , onInput PasswordField
+                        ]
+                        []
+                    ]
                 , a [] [ text "Welcome Back" ]
-                , button [] [ text "Login" ]
-                , p [ id "justJoin" ] [ text "Don't have an account?", a [] [ text "Join" ] ]
+                , button [ onClick GoToHomePage ] [ text "Login" ]
+                , p [ id "justJoin" ]
+                    [ text "Don't have an account?"
+                    , a [] [ text "Join" ]
+                    ]
                 ]
             ]
         ]
