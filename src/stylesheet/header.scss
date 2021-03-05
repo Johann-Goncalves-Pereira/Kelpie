@@ -321,16 +321,11 @@ input._input {
     outline: none;
     border: none;
     border-radius: 8px;
+    font-size: 1rem;
 
     cursor: pointer;
 
     height: 100%;
-}
-.aLogin {
-    padding: 0.625rem 0;
-
-    text-decoration: none;
-    font-size: 1rem;
 }
 
 .buttonJoin {
@@ -344,13 +339,6 @@ input._input {
     height: 100%;
 
     background: var(--green);
-}
-.aJoin {
-    text-decoration: none;
-
-    padding: 0.625rem;
-
-    color: var(--background-white);
 }
 $breakpoint-tiny-computer-screen: 950px;
 @media (max-width: $breakpoint-tiny-computer-screen) {
