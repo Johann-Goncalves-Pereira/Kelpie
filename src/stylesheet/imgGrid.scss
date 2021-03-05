@@ -9,6 +9,12 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
 .photo > img {
     border-radius: 8px;
 
