@@ -12,3 +12,4 @@ dev: dep
 
 prod: dep
 	npm run-script build
+

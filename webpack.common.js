@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
+
 var MODE =
     process.env.npm_lifecycle_event === "prod" ? "production" : "development";
 var filename = MODE == "production" ? "js/[name]-[hash].js" : "js/index.js";
