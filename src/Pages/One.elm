@@ -8,17 +8,6 @@ import Shared
 
 
 
--- Svg.Attributes = SvgAttributes
----------
--- Msg --
----------
-
-
-type Msg
-    = GoToLogin
-
-
-
 -----------
 -- Model --
 -----------
@@ -26,6 +15,8 @@ type Msg
 
 type alias Model =
     { userSharedStatus : Bool
+
+    --
     }
 
 
@@ -33,6 +24,16 @@ init : Model
 init =
     { userSharedStatus = False
     }
+
+
+
+---------
+-- Msg --
+---------
+
+
+type Msg
+    = GoToLogin
 
 
 
@@ -59,11 +60,6 @@ view model shared =
     ( "Home"
     , viewPage model shared
     )
-
-
-
---  headerPage model
---     , imgDisplay model
 
 
 viewPage : Model -> Shared.Model -> Html Msg
@@ -226,9 +222,3 @@ imgDisplay model =
                 ]
             ]
         ]
-
-
-
--- imageColumns : Model -> Html Msg
--- imageColumns model =
--- div [] []

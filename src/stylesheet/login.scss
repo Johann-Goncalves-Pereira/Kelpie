@@ -107,6 +107,13 @@
         align-items: center;
     }
 
+    label p {
+        margin: 0 auto 0 0;
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: #e74343;
+    }
+
     label > input,
     button {
         padding: 0.1rem 0.2rem;
@@ -121,6 +128,10 @@
 
         height: 2.2rem;
         width: 35rem;
+    }
+
+    label input {
+        font-weight: 300;
     }
 
     button {
