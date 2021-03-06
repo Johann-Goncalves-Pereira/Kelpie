@@ -2,7 +2,8 @@ module Pages.Two exposing (..)
 
 -- import Browser.Navigation as Nav
 
-import Html exposing (Html, a, button, div, h2, img, input, label, p, span, text)
+import Bitwise exposing (and)
+import Html exposing (Html, a, button, div, h2, i, img, input, label, p, span, text)
 import Html.Attributes exposing (alt, class, id, minlength, name, src, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Route
@@ -18,6 +19,7 @@ import Shared
 type alias Model =
     { emailField : String
     , passwordField : String
+    , emailError : String
     , columns : List Int
     }
 
@@ -26,6 +28,7 @@ init : Model
 init =
     { emailField = ""
     , passwordField = ""
+    , emailError = ""
     , columns = []
     }
 
@@ -48,11 +51,59 @@ type Msg
 ------------
 
 
+isEmailValid : String -> Bool
+isEmailValid email =
+    let
+        emailParts =
+            String.split "@" email
+
+        dotRules =
+            emailParts
+                |> List.tail
+                |> Maybe.withDefault []
+                |> String.join ""
+                |> String.contains "."
+    in
+    if not <| String.contains "@" email then
+        False
+        -- Need to have a @
+
+    else if String.startsWith "@" email then
+        False
+        -- The @ can not be the first character
+
+    else if (emailParts |> List.length) /= 2 then
+        False
+        -- Just have one @ and have two Strings on the sides of @
+
+    else if not dotRules then
+        False
+        -- After @ need to have a String with at least a dot
+
+    else if String.endsWith "." email then
+        False
+        -- The dot couldn't be the last character of String
+
+    else
+        True
+
+
 update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
 update msg model shared =
     case msg of
         EmailField email ->
-            ( { model | emailField = email }
+            let
+                emailError =
+                    if isEmailValid email then
+                        ""
+
+                    else
+                        "Email Invalid"
+            in
+            ( { model
+                | emailField = email
+                , emailError = emailError
+              }
             , Cmd.none
             , Shared.NoOp
             )
@@ -64,7 +115,10 @@ update msg model shared =
             )
 
         GoToHomePage ->
-            ( model, Route.pushUrl shared.key Route.Page1, Shared.UserState True )
+            ( model
+            , Route.pushUrl shared.key Route.Page1
+            , Shared.UserState True
+            )
 
 
 
@@ -125,6 +179,9 @@ viewPage model shared =
                         , onInput EmailField
                         ]
                         []
+                    , span [ class "focus-border" ] []
+                    , i [] []
+                    , p [] [ text model.emailError ]
                     ]
                 , label []
                     [ text "Password"
