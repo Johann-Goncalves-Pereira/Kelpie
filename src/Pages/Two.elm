@@ -2,31 +2,17 @@ module Pages.Two exposing (..)
 
 -- import Browser.Navigation as Nav
 
-import Html exposing (Html, a, button, div, h2, img, input, p, span, text)
-import Html.Attributes exposing (alt, class, id, minlength, src, type_, value)
+import Html exposing (Html, a, button, div, h2, img, input, label, p, span, text)
+import Html.Attributes exposing (alt, class, id, minlength, name, src, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Route
 import Shared
 
 
 
----------
--- Msg --
----------
-
-
-type Msg
-    = EmailField String
-    | PasswordField String
-    | GoToHomePage
-
-
-
 -----------
 -- Model --
 -----------
--- email password
--- make a msg that save the String of email input
 
 
 type alias Model =
@@ -45,6 +31,18 @@ init =
 
 
 
+---------
+-- Msg --
+---------
+
+
+type Msg
+    = EmailField String
+    | PasswordField String
+    | GoToHomePage
+
+
+
 ------------
 -- Update --
 ------------
@@ -53,8 +51,8 @@ init =
 update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
 update msg model shared =
     case msg of
-        EmailField text ->
-            ( { model | emailField = text }
+        EmailField email ->
+            ( { model | emailField = email }
             , Cmd.none
             , Shared.NoOp
             )
@@ -66,7 +64,7 @@ update msg model shared =
             )
 
         GoToHomePage ->
-            ( model, Route.pushUrl shared.key Route.Page1, Shared.NoOp )
+            ( model, Route.pushUrl shared.key Route.Page1, Shared.UserState True )
 
 
 
@@ -118,27 +116,29 @@ viewPage model shared =
                         ]
                     ]
                 , p [ id "or" ] [ text "or" ]
-                , span []
+                , label []
                     [ text "Email"
                     , input
                         [ type_ "text"
+                        , name "email"
                         , value model.emailField
                         , onInput EmailField
                         ]
                         []
                     ]
-                , span []
+                , label []
                     [ text "Password"
                     , input
                         [ minlength 8
                         , type_ "password"
+                        , name "password"
                         , value model.passwordField
                         , onInput PasswordField
                         ]
                         []
                     ]
                 , a [] [ text "Welcome Back" ]
-                , button [ onClick GoToHomePage ] [ text "Login" ]
+                , button [ onClick GoToHomePage ] [ text "Submit" ]
                 , p [ id "justJoin" ]
                     [ text "Don't have an account?"
                     , a [] [ text "Join" ]

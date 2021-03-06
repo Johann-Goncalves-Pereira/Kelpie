@@ -15,9 +15,7 @@ import Shared
 
 
 type Msg
-    = InputTextField String
-    | InputShared String
-    | GoToLogin
+    = GoToLogin
 
 
 
@@ -27,15 +25,13 @@ type Msg
 
 
 type alias Model =
-    { textField : String
-    , columns : List Int
+    { userSharedStatus : Bool
     }
 
 
 init : Model
 init =
-    { textField = ""
-    , columns = []
+    { userSharedStatus = False
     }
 
 
@@ -48,15 +44,6 @@ init =
 update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
 update msg model shared =
     case msg of
-        InputTextField text ->
-            ( { model | textField = text }
-            , Cmd.none
-            , Shared.NoOp
-            )
-
-        InputShared text ->
-            ( model, Cmd.none, Shared.UpdateTextField text )
-
         GoToLogin ->
             ( model, Route.pushUrl shared.key Route.Page2, Shared.NoOp )
 
@@ -82,14 +69,14 @@ view model shared =
 viewPage : Model -> Shared.Model -> Html Msg
 viewPage model shared =
     div [ class "bodyElm" ]
-        [ headerPage model
+        [ headerPage model shared
         , imgDisplay model
         , button [ onClick GoToLogin ] [ text "Go to page 2!" ]
         ]
 
 
-headerPage : Model -> Html Msg
-headerPage model =
+headerPage : Model -> Shared.Model -> Html Msg
+headerPage model shared =
     header []
         [ nav [ class "navTop" ]
             -- Left Header
@@ -147,11 +134,7 @@ headerPage model =
                         , div [] []
                         ]
                     ]
-                , div
-                    [ id "verticalLeft" ]
-                    [ button [ class "buttonLogin", onClick GoToLogin ] [ text "Login" ]
-                    , button [ class "buttonJoin", onClick GoToLogin ] [ text "Join Free" ]
-                    ]
+                , sharedStatus model shared
                 ]
             ]
         , div [ id "tags" ]
@@ -186,8 +169,19 @@ headerPage model =
         ]
 
 
+sharedStatus : Model -> Shared.Model -> Html Msg
+sharedStatus model shared =
+    if shared.userState == False then
+        div [ id "verticalLeft" ]
+            [ button [ onClick GoToLogin ] [ text "Login" ]
+            , button [ onClick GoToLogin ] [ text "Join Free" ]
+            ]
 
---
+    else
+        div [ id "verticalLeft" ]
+            [ a [] [ img [ src "source/bell.svg" ] [] ]
+            , a [] [ img [ src "images/_.jpeg" ] [] ]
+            ]
 
 
 imgDisplay : Model -> Html Msg
