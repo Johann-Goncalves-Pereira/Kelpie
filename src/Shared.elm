@@ -12,6 +12,7 @@ import Url
 
 type Msg
     = NoOp
+    | UserState Bool
     | UpdateTextField String
     | UpdateUrl Url.Url
 
@@ -24,6 +25,7 @@ type Msg
 
 type alias Model =
     { textField : String
+    , userState : Bool
     , key : Nav.Key
     , url : Url.Url
     }
@@ -32,6 +34,7 @@ type alias Model =
 init : Nav.Key -> Url.Url -> Model
 init key url =
     { textField = ""
+    , userState = False
     , key = key
     , url = url
     }
@@ -48,6 +51,9 @@ update msg model =
     case msg of
         NoOp ->
             model
+
+        UserState status ->
+            { model | userState = status }
 
         UpdateTextField text ->
             { model | textField = text }
