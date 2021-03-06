@@ -313,32 +313,51 @@ input._input {
     height: 2.3rem;
 
     border-left: 1px solid var(--background-light-dark-grey);
-}
-.buttonLogin {
-    margin: 0 1rem;
 
-    background: none;
-    outline: none;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    button:first-child {
+        margin: 0 1rem;
 
-    cursor: pointer;
+        background: none;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
 
-    height: 100%;
-}
+        cursor: pointer;
 
-.buttonJoin {
-    padding: 0 1rem;
+        height: 100%;
+    }
 
-    cursor: pointer;
+    button:last-child {
+        padding: 0 1rem;
 
-    outline: none;
-    border: none;
-    border-radius: 8px;
-    height: 100%;
+        cursor: pointer;
 
-    background: var(--green);
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        height: 100%;
+
+        background: var(--green);
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+        margin: 0 1rem;
+        cursor: pointer;
+    }
+    a:first-child img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    a:last-child img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+    }
 }
 $breakpoint-tiny-computer-screen: 950px;
 @media (max-width: $breakpoint-tiny-computer-screen) {
