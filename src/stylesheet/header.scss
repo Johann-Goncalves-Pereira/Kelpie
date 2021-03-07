@@ -1,49 +1,38 @@
-//  root of header
 header {
-    display: block;
-}
-
-.navTop,
-.search,
-.ulHeader,
-.rightHeader,
-.centerHeader,
-.logoAndSearch,
-.rightHeader a,
-#verticalLeft,
-#tags {
-    display: flex;
-    align-items: center;
-}
-
-.navTop {
-    width: 100%;
-    height: 4.2rem;
-
+    // max-width: 100%;
     background-color: var(--background-black-grey);
 }
 
-// Logo and Search Bar
-.logoAndSearch {
+.headerObjects {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     margin-left: 1rem;
 
     flex: 1;
-    // width: -webkit-fill-available;
+}
+
+.leftHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     width: 100%;
 }
 
-// logo
-img.logoHeader {
+.leftHeader > a {
+    cursor: pointer;
+}
+.leftHeader a img {
     width: 2.5rem;
     height: 2.5rem;
 }
 
-// search
-.allSearchBar {
+.leftHeader > form {
     width: 100%;
     margin-left: 1.2rem;
-}
-.formSearch {
+
     display: flex;
     border-color: transparent;
     border-radius: 24px;
@@ -52,18 +41,14 @@ img.logoHeader {
     background-color: var(--background-dark-grey);
 }
 
-.buttonSearch {
+.leftHeader > form button {
     padding: 0;
-
     text-align: inherit;
 
-    outline: none;
-
+    outline: 0;
     box-shadow: none;
     border-color: initial;
-    border: none;
-
-    cursor: pointer;
+    border: 0;
 
     display: flex;
     align-items: center;
@@ -71,21 +56,22 @@ img.logoHeader {
     background: var(--background-dark-grey);
 
     width: 2.3rem;
+    cursor: pointer;
+}
+.leftHeader > form button img {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.leftHeader > form button:first-child {
+    border-radius: 50% 0 0 50%;
+    padding-left: 10px;
+}
+.leftHeader > form button.visualSearch {
+    border-radius: 0 50% 50% 0;
+    padding: 0 15px 0 0;
 }
 
-.inputSearch {
-    grid-row: 1;
-    display: flex;
-    width: 100%;
-
-    background: var(--background-dark-grey);
-}
-input._input {
-    background: var(--background-dark-grey);
-    color: var(--background-light);
-}
-
-._input {
+.leftHeader > form input {
     flex-grow: 1;
 
     padding: 0 0 0 0.5rem;
@@ -98,65 +84,32 @@ input._input {
     background: var(--background-dark-grey);
     color: var(--background-light);
 
+    grid-row: 1;
+    display: flex;
     width: 100%;
 }
 
-.VisualSearch {
-    display: inline-block;
-    max-width: 100%;
-}
-.buttonVisualSearch {
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0;
-
-    outline: none;
-    border: none;
-    border-color: initial;
-    border-bottom: none;
-    box-shadow: none;
-
-    cursor: pointer;
-
-    background: var(--background-dark-grey);
-}
-
-.buttonSearch img,
-.buttonVisualSearch img {
-    width: 1.25rem;
-    height: 1.25rem;
-}
-.buttonSearch {
-    padding-left: 10px;
-
-    border-radius: 50% 0 0 50%;
-}
-.buttonVisualSearch {
-    padding: 0 15px 0 0;
-
-    border-radius: 0 50% 50% 0;
-}
-
-.allSearchBar:hover input._input,
-.allSearchBar:hover .formSearch,
-.allSearchBar:hover .buttonVisualSearch,
-.allSearchBar:hover .buttonSearch {
+.leftHeader > form:hover button,
+.leftHeader > form:hover input {
     background: var(--background-light-dark-grey);
     transition: 200ms;
 }
 
-// Page name / Brandis / ...[List]
 .centerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     padding: 0 1rem 0 0.5rem;
     text-align: center;
     list-style-type: none;
 }
 
-.ulHeader {
+.centerHeader > ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     margin: 0;
     padding: 0;
 
@@ -164,16 +117,12 @@ input._input {
     list-style-image: initial;
 }
 
-// name page
-.liNamePage {
-    display: inline-block;
-
+.currentPage {
+    margin: auto 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
 }
-.aNamePage {
-    padding: 0 0.75rem;
-
+.currentPage > a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,15 +134,17 @@ input._input {
     color: var(--background-light);
 }
 
-// brands
-.liBrands {
+.brands {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: auto 0.5rem;
     display: inline-block;
     font-size: 0.875rem;
     font-weight: 500;
 }
-.aBrands {
-    padding: 10px 0.75rem;
-
+.brands > a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -202,33 +153,27 @@ input._input {
 
     color: var(--background-light);
     text-decoration-color: var(--background-light);
+    height: 1rem;
 }
-.aBrands:hover {
+.brands > a:hover {
     color: var(--background-white);
     cursor: pointer;
 }
-.divBrands span {
-    background-clip: text;
-
-    color: transparent;
-}
-.spanBrands {
+.brands > a span {
     position: relative;
-    top: -10px;
+    top: -24px;
+    right: -24px;
     font-size: 0.6rem;
 
-    /* Fallback: Set a background color. */
+    color: transparent;
+
     background-color: red;
 
-    /* Create the gradient. */
     background-image: linear-gradient(45deg, #ff0000, #2c33ff);
 
-    /* Set the background size and repeat properties. */
     background-size: 100%;
     background-repeat: repeat;
 
-    /* Use the text as a mask for the background. */
-    /* This will show the gradient as a text color rather than element bg. */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
@@ -236,135 +181,115 @@ input._input {
 }
 
 // dots ...[list]
-.lsDots {
+.placeHolderOptions {
     display: inline-block;
 }
-.divDots {
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-}
-.buttonDots {
-    padding: 0 0.75rem;
-
+.placeHolderOptions > button {
+    margin: auto 0 auto 0.8rem;
+    padding: 0.01rem 0 0 0;
+    outline: 0;
     box-shadow: none;
-    border-color: none;
-    border-radius: 4px;
-    border: none;
-    background: none;
-    outline: none;
+    border-radius: 6px;
+    border: 0;
 
     text-align: inherit;
 
-    height: 100%;
+    height: 1.5rem;
+    width: 3rem;
+
     line-height: 1;
 
     vertical-align: middle;
     transition: all 0.1s ease-in-out;
 
+    background: var(--background-light-dark-grey);
     color: var(--background-light);
 }
-.buttonDots img {
-    padding-top: 5px;
-
+.placeHolderOptions > button img {
     width: 1.5rem;
-    height: 1.5rem;
+    height: auto;
 }
-.buttonDots:hover {
-    border-radius: 8px;
+.placeHolderOptions > button:hover {
+    background: var(--background-light-grey);
 
     cursor: pointer;
-
-    background: var(--background-dark-grey);
-
     transition: 200ms;
 }
 
-// not change
+.rightHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-// Photo / Join / Login
-.buttonSubmitPhoto {
-    // margin: 0 1.5rem 0 0.625rem;
+.rightHeader > button {
+    margin-right: 1rem;
+    min-width: 7.4rem;
+    height: 2.6rem;
 
     outline: none;
-    border: none;
     border-radius: 8px;
 
     cursor: pointer;
-
-    height: 100%;
 
     background-color: var(--background-black-grey);
     border: 2px solid var(--background-dark-grey);
 }
-.buttonSubmitPhoto:hover {
+.rightHeader > button:hover {
     background: var(--background-dark-grey);
-
     transition: 200ms;
 }
-#aSubmitPhoto {
-    padding: 0.625rem;
 
-    text-decoration: none;
-}
-
-#verticalLeft {
-    margin: 0 1rem;
-    height: 2.3rem;
-
-    border-left: 1px solid var(--background-light-dark-grey);
-
-    button:first-child {
-        margin: 0 1rem;
-
-        background: none;
-        outline: none;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-
-        cursor: pointer;
-
-        height: 100%;
-    }
-
-    button:last-child {
-        padding: 0 1rem;
-
-        cursor: pointer;
-
-        outline: none;
-        border: none;
-        border-radius: 8px;
-        height: 100%;
-
-        background: var(--green);
-    }
-
+.usersStatus {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    a {
-        margin: 0 1rem;
-        cursor: pointer;
-    }
-    a:first-child img {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-    a:last-child img {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-    }
+    height: auto;
+
+    border-left: 1px solid var(--background-light-dark-grey);
 }
+.usersStatus button {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    height: 2rem;
+
+    cursor: pointer;
+}
+.usersStatus button:first-child {
+    background: none;
+}
+
+.usersStatus button:last-child {
+    margin-right: 1rem;
+    min-width: 5.5rem;
+    background: var(--green);
+}
+
+.usersStatus a {
+    margin: 0 1rem;
+    cursor: pointer;
+}
+.usersStatus a:first-child img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.usersStatus a:last-child img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
 $breakpoint-tiny-computer-screen: 950px;
 @media (max-width: $breakpoint-tiny-computer-screen) {
-    .liNamePage,
-    .buttonLogin,
-    .liBrands,
-    .buttonSubmitPhoto {
+    .brands,
+    .currentPage,
+    .rightHeader > button,
+    .usersStatus button:last-child {
         display: none;
     }
 }
@@ -373,6 +298,10 @@ $breakpoint-tiny-computer-screen: 950px;
 $breakpoint-small-computer-screen: 1595px;
 
 #tags {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     background-color: var(--background-black-grey);
 
     height: 3rem;
