@@ -66,73 +66,76 @@ viewPage : Model -> Shared.Model -> Html Msg
 viewPage model shared =
     div [ class "bodyElm" ]
         [ headerPage model shared
-        , imgDisplay model
-        , button [ onClick GoToLogin ] [ text "Go to page 2!" ]
+        , imageDisplay model
         ]
 
 
 headerPage : Model -> Shared.Model -> Html Msg
 headerPage model shared =
     header []
-        [ nav [ class "navTop" ]
-            -- Left Header
-            [ div [ class "logoAndSearch" ]
-                [ div [ class "search" ]
-                    [ a [ class "aLogo", href "http://localhost:8080/" ] [ img [ class "logoHeader", src "source/logo.svg", alt "KELPIE" ] [] ] ]
-                , div [ class "allSearchBar" ]
-                    [ form [ class "formSearch" ]
-                        [ button [ class "buttonSearch", type_ "submit", alt "Search" ] [ img [ src "source/search.svg" ] [] ]
-                        , div [ class "inputSearch" ]
-                            -- I need to make this but in elm
-                            -- if ($(window).width() < 400 ) {
-                            -- $("input[type='email']").attr("placeholder","join our newsletter");
-                            -- }
-                            -- else { $("input[type='email']").attr("placeholder","your email");}
-                            [ input [ class "_input", placeholder "Search free high-resolution photos" ] []
-                            , div [ class "react-autoWhatever" ] []
-                            ]
-                        , div [ class "VisualSearch" ]
-                            [ button [ class "buttonVisualSearch" ] [ img [ src "source/scan.svg", alt "Visual Search" ] [] ]
-                            , div [] []
-                            ]
+        [ nav [ class "headerObjects" ]
+            [ div [ class "leftHeader" ]
+                [ a [ href "http://localhost:8080/" ]
+                    [ img
+                        [ class "logoHeader"
+                        , src "source/logo.svg"
+                        , alt "KELPIE"
                         ]
+                        []
+                    ]
+                , form [ class "formSearch" ]
+                    [ button
+                        [ type_ "submit"
+                        , alt "Search"
+                        ]
+                        [ img [ src "source/search.svg" ] [] ]
+                    , input
+                        [ placeholder "Search free high-resolution photos"
+                        ]
+                        []
+                    , div [ class "react-autoWhatever" ] []
+                    , button [ class "visualSearch" ]
+                        [ img
+                            [ src "source/scan.svg"
+                            , alt "Visual Search"
+                            ]
+                            []
+                        ]
+                    , div [] []
                     ]
                 ]
 
             -- Center Header
             , div [ class "centerHeader" ]
-                [ ul [ class "ulHeader" ]
+                [ ul []
                     -- Name of Page
-                    [ li [ class "liNamePage" ]
-                        [ a [ class "aNamePage" ] [ h2 [] [ text "Home" ] ]
+                    [ li [ class "currentPage" ]
+                        [ a [] [ h2 [] [ text "Home" ] ]
                         ]
-                    , li [ class "liBrands" ]
-                        [ a [ class "aBrands", href "/brands" ]
-                            [ div [ class "divBrands" ] [ h4 [] [ text "Brands", span [ class "spanBrands" ] [ text "New" ] ] ] ]
-                        ]
-                    , li [ class "liDots" ]
-                        [ div [ class "divDots" ]
-                            [ button [ class "buttonDots" ]
-                                [ img [ src "source/dots.svg", alt "..." ] [] ]
-                            , div [] []
+                    , li [ class "brands" ]
+                        [ a [ href "/brands" ]
+                            [ text "Brands"
+                            , span [] [ text "New" ]
                             ]
+                        ]
+                    , li [ class "placeHolderOptions" ]
+                        [ button []
+                            [ img [ src "source/dots.svg", alt "..." ] [] ]
+                        , div [] []
                         ]
                     ]
                 ]
 
             -- Right Header
             , div [ class "rightHeader" ]
-                [ div []
-                    [ div [ class "submitPhoto" ]
-                        [ button
-                            [ class "buttonSubmitPhoto" ]
-                            [ a [ id "aSubmitPhoto" ] [ text "Submit Photo" ] ]
-                        , div [] []
-                        ]
-                    ]
+                [ button
+                    []
+                    [ text "Submit Photo" ]
                 , sharedStatus model shared
                 ]
             ]
+
+        -- Tags
         , div [ id "tags" ]
             [ h3 [ id "h3Tags" ] [ text "Tags" ]
             , div [ class "verticalRight" ] []
@@ -168,20 +171,20 @@ headerPage model shared =
 sharedStatus : Model -> Shared.Model -> Html Msg
 sharedStatus model shared =
     if shared.userState == False then
-        div [ id "verticalLeft" ]
+        div [ class "usersStatus" ]
             [ button [ onClick GoToLogin ] [ text "Login" ]
             , button [ onClick GoToLogin ] [ text "Join Free" ]
             ]
 
     else
-        div [ id "verticalLeft" ]
+        div [ id "usersStatus" ]
             [ a [] [ img [ src "source/bell.svg" ] [] ]
             , a [] [ img [ src "images/_.jpeg" ] [] ]
             ]
 
 
-imgDisplay : Model -> Html Msg
-imgDisplay model =
+imageDisplay : Model -> Html Msg
+imageDisplay model =
     div [ class "imgContainer" ]
         [ div [ class "imgGrid" ]
             [ div [ class "imgColumns" ]
@@ -222,3 +225,11 @@ imgDisplay model =
                 ]
             ]
         ]
+
+
+
+-- I need to make this but in elm
+-- if ($(window).width() < 400 ) {
+-- $("input[type='email']").attr("placeholder","join our newsletter");
+-- }
+-- else { $("input[type='email']").attr("placeholder","your email");}
