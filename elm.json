@@ -12,6 +12,7 @@
             "elm/http": "2.0.0",
             "elm/project-metadata-utils": "1.0.1",
             "elm/random": "1.0.0",
+            "elm/regex": "1.0.0",
             "elm/svg": "1.0.1",
             "elm/url": "1.0.0"
         },
