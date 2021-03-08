@@ -6,8 +6,10 @@ import Bitwise exposing (and)
 import Html exposing (Html, a, button, div, h2, i, img, input, label, map, p, span, text)
 import Html.Attributes exposing (alt, class, id, minlength, name, src, type_, value)
 import Html.Events exposing (onClick, onInput)
+import Regex
 import Route
 import Shared exposing (Model)
+import String exposing (join)
 import Url.Parser.Query exposing (int)
 
 
@@ -37,6 +39,20 @@ init =
 
 
 
+-- type alias RegexModel =
+--     { regularNumber : Regex.Regex
+--     , character : Regex.Regex
+--     }
+
+
+regularExpression : Regex.Regex
+regularExpression =
+    Maybe.withDefault Regex.never <|
+        Regex.fromString "\\d"
+
+
+
+-- \\s!@#$%*+=^~?`´
 ---------
 -- Msg --
 ---------
@@ -136,12 +152,20 @@ isPasswordValid password =
             String.length password
 
         -- takes number of characters on password and transform in a Int
+        numberValidation =
+            Regex.contains regularExpression password
+
+        -- charactersValidation =
+        --     Regex.contains regexInit.regularCharacter password
     in
     if passwordLength == 0 then
         Just "The password field it's empty"
 
     else if passwordLength < 8 then
         Just "Password need to have at least 8 characters"
+
+    else if numberValidation == False then
+        Just "Password need to have at least a number"
 
     else
         Nothing
