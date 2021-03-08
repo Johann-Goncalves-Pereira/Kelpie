@@ -3,11 +3,12 @@ module Pages.Two exposing (..)
 -- import Browser.Navigation as Nav
 
 import Bitwise exposing (and)
-import Html exposing (Html, a, button, div, h2, i, img, input, label, p, span, text)
+import Html exposing (Html, a, button, div, h2, i, img, input, label, map, p, span, text)
 import Html.Attributes exposing (alt, class, id, minlength, name, src, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Route
-import Shared
+import Shared exposing (Model)
+import Url.Parser.Query exposing (int)
 
 
 
@@ -18,8 +19,9 @@ import Shared
 
 type alias Model =
     { emailField : String
-    , passwordField : String
     , emailError : String
+    , passwordField : String
+    , passwordError : Maybe String
     , columns : List Int
     }
 
@@ -27,8 +29,9 @@ type alias Model =
 init : Model
 init =
     { emailField = ""
-    , passwordField = ""
     , emailError = ""
+    , passwordField = ""
+    , passwordError = Nothing
     , columns = []
     }
 
@@ -46,9 +49,47 @@ type Msg
 
 
 
+-- type ErrorMsg
+--     = PasswordError Maybe String
 ------------
 -- Update --
 ------------
+
+
+update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
+update msg model shared =
+    case msg of
+        EmailField email ->
+            let
+                emailError =
+                    if isEmailValid email then
+                        ""
+
+                    else
+                        "Email Invalid"
+            in
+            ( { model
+                | emailField = email
+                , emailError = emailError
+              }
+            , Cmd.none
+            , Shared.NoOp
+            )
+
+        PasswordField password ->
+            ( { model
+                | passwordField = password
+                , passwordError = isPasswordValid password
+              }
+            , Cmd.none
+            , Shared.NoOp
+            )
+
+        GoToHomePage ->
+            ( model
+            , Route.pushUrl shared.key Route.Page1
+            , Shared.UserState True
+            )
 
 
 isEmailValid : String -> Bool
@@ -88,37 +129,22 @@ isEmailValid email =
         True
 
 
-update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
-update msg model shared =
-    case msg of
-        EmailField email ->
-            let
-                emailError =
-                    if isEmailValid email then
-                        ""
+isPasswordValid : String -> Maybe String
+isPasswordValid password =
+    let
+        passwordLength =
+            String.length password
 
-                    else
-                        "Email Invalid"
-            in
-            ( { model
-                | emailField = email
-                , emailError = emailError
-              }
-            , Cmd.none
-            , Shared.NoOp
-            )
+        -- takes number of characters on password and transform in a Int
+    in
+    if passwordLength == 0 then
+        Just "The password field it's empty"
 
-        PasswordField password ->
-            ( { model | passwordField = password }
-            , Cmd.none
-            , Shared.NoOp
-            )
+    else if passwordLength < 8 then
+        Just "Password need to have at least 8 characters"
 
-        GoToHomePage ->
-            ( model
-            , Route.pushUrl shared.key Route.Page1
-            , Shared.UserState True
-            )
+    else
+        Nothing
 
 
 
@@ -136,6 +162,15 @@ view model shared =
 
 viewPage : Model -> Shared.Model -> Html Msg
 viewPage model shared =
+    let
+        passwordError =
+            case model.passwordError of
+                Just err ->
+                    p [] [ text err ]
+
+                Nothing ->
+                    text ""
+    in
     div [ class "bodyElm" ]
         [ div [ class "loginContainer" ]
             [ div [ class "loginBlock" ]
@@ -179,8 +214,6 @@ viewPage model shared =
                         , onInput EmailField
                         ]
                         []
-                    , span [ class "focus-border" ] []
-                    , i [] []
                     , p [] [ text model.emailError ]
                     ]
                 , label []
@@ -193,6 +226,7 @@ viewPage model shared =
                         , onInput PasswordField
                         ]
                         []
+                    , passwordError
                     ]
                 , a [] [ text "Welcome Back" ]
                 , button [ onClick GoToHomePage ] [ text "Submit" ]
