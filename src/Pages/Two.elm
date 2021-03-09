@@ -21,7 +21,6 @@ type alias Model =
     , emailError : String
     , passwordField : String
     , passwordError : Maybe String
-    , columns : List Int
     }
 
 
@@ -31,7 +30,6 @@ init =
     , emailError = ""
     , passwordField = ""
     , passwordError = Nothing
-    , columns = []
     }
 
 
@@ -57,7 +55,6 @@ regularExpressionInit =
 
 
 
--- \\s!@#$%*+=^~?`´
 ---------
 -- Msg --
 ---------
@@ -67,6 +64,18 @@ type Msg
     = EmailField String
     | PasswordField String
     | GoToHomePage
+
+
+type Any value
+    = Some value
+    | Other value
+    | NoValue
+
+
+type alias Record =
+    { v1 : Any String
+    , v2 : Any Int
+    }
 
 
 
@@ -107,10 +116,14 @@ update msg model shared =
             )
 
         GoToHomePage ->
-            ( model
-            , Route.pushUrl shared.key Route.Page1
-            , Shared.UserState True
-            )
+            if canSubmit model then
+                ( model
+                , Route.pushUrl shared.key Route.Page1
+                , Shared.UserState True
+                )
+
+            else
+                ( model, Cmd.none, Shared.NoOp )
 
 
 isEmailValid : String -> Bool
@@ -189,6 +202,19 @@ isPasswordValid password =
 
     else
         Nothing
+
+
+canSubmit : Model -> Bool
+canSubmit { emailField, passwordField } =
+    if
+        isEmailValid emailField
+            && isPasswordValid passwordField
+            == Nothing
+    then
+        True
+
+    else
+        False
 
 
 
@@ -272,7 +298,7 @@ viewPage model shared =
                         []
                     , passwordError
                     ]
-                , a [] [ text "Welcome Back" ]
+                , a [] [ text "WelcomeBack" ]
                 , button [ onClick GoToHomePage ] [ text "Submit" ]
                 , p [ id "justJoin" ]
                     [ text "Don't have an account?"
