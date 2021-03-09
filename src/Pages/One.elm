@@ -177,7 +177,7 @@ sharedStatus model shared =
             ]
 
     else
-        div [ id "usersStatus" ]
+        div [ class "usersStatus" ]
             [ a [] [ img [ src "source/bell.svg" ] [] ]
             , a [] [ img [ src "images/_.jpeg" ] [] ]
             ]
