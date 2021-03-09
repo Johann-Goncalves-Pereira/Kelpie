@@ -82,12 +82,9 @@
     }
 
     .automaticLogin a:last-child {
+        padding-right: 13rem;
         background: #ffffff;
         color: #2b2b2b;
-    }
-
-    .automaticLogin a:last-child {
-        padding-right: 13rem;
     }
 
     .automaticLogin a:hover {
@@ -153,5 +150,300 @@
     }
     p#justJoin > a:hover {
         color: #2f86f7;
+    }
+}
+
+$breakpoint-tiny-computer-screen: 950px;
+@media (max-width: $breakpoint-tiny-computer-screen) {
+    .loginBlock {
+        background: var(--background-black-grey);
+        display: grid;
+
+        height: 90%;
+        width: 85%;
+        margin: auto;
+
+        border-radius: 8px;
+
+        a,
+        h2,
+        button {
+            margin: auto;
+        }
+
+        button,
+        p#justJoin > a,
+        .automaticLogin a {
+            transition: 200ms;
+            cursor: pointer;
+        }
+
+        img {
+            height: 6rem;
+            width: auto;
+            margin: 2rem auto;
+            display: flex;
+        }
+
+        .loginStatic > h2 {
+            width: 4rem;
+            display: flex;
+        }
+        .loginStatic > p {
+            width: 6.75rem;
+            display: flex;
+            margin: 0.5rem auto;
+            // transform: translateX(-50%);
+        }
+
+        .automaticLogin {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-row-gap: 1rem;
+            align-items: center;
+        }
+
+        .automaticLogin a {
+            padding: 0.1rem 5rem;
+
+            border: 0;
+            border-radius: 6px;
+
+            // width: 85%;
+            height: 2.2rem;
+
+            display: flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .automaticLogin a #comercialLogo {
+            padding-right: 1.24rem;
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+
+        .automaticLogin a:first-child {
+            background: #1977f3;
+        }
+
+        .automaticLogin a:last-child {
+            padding-right: 6rem;
+            background: #ffffff;
+            color: #2b2b2b;
+        }
+
+        .automaticLogin a:hover {
+            filter: brightness(0.9);
+        }
+
+        p#or {
+            margin: 2rem auto 0;
+            height: 1rem;
+        }
+
+        label {
+            margin: 0 auto;
+
+            display: grid;
+            grid-template-rows: repeat(1, 1fr);
+            align-items: center;
+        }
+
+        label p {
+            margin: 0 auto 0 0;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #e74343;
+        }
+
+        label > input,
+        button {
+            padding: 0.1rem 0.2rem;
+            background: var(--background-grey);
+
+            border: 1px dotted var(--background-light-grey);
+            border-radius: 6px;
+            outline: 0;
+
+            font-size: 1rem;
+            font-weight: 400;
+
+            height: 2.2rem;
+            width: 21rem;
+        }
+
+        label input {
+            font-weight: 300;
+        }
+
+        button {
+            background: var(--background-black);
+            border: 0;
+        }
+        button:hover {
+            background: #161616;
+        }
+
+        p#justJoin {
+            margin: 2rem auto;
+        }
+        p#justJoin > a {
+            margin: 2rem 0;
+            padding: 0.5rem;
+            color: #5959ff;
+            text-decoration: underline;
+        }
+        p#justJoin > a:hover {
+            color: #2f86f7;
+        }
+    }
+}
+
+$breakpoint-small-computer-screen: 1300px;
+@media (max-width: $breakpoint-small-computer-screen) {
+    .loginBlock {
+        background: var(--background-black-grey);
+        display: grid;
+
+        height: 75%;
+        width: 50%;
+        margin: auto;
+
+        border-radius: 8px;
+
+        a,
+        h2,
+        button {
+            margin: auto;
+        }
+
+        button,
+        p#justJoin > a,
+        .automaticLogin a {
+            transition: 200ms;
+            cursor: pointer;
+        }
+
+        img {
+            height: 6rem;
+            width: auto;
+            margin: 2rem auto;
+            display: flex;
+        }
+
+        .loginStatic > h2 {
+            width: 4rem;
+            display: flex;
+        }
+        .loginStatic > p {
+            width: 6.75rem;
+            display: flex;
+            margin: 0.5rem auto;
+            // transform: translateX(-50%);
+        }
+
+        .automaticLogin {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-row-gap: 1rem;
+            align-items: center;
+        }
+
+        .automaticLogin a {
+            padding: 0.1rem 5rem;
+
+            border: 0;
+            border-radius: 6px;
+
+            // width: 85%;
+            height: 2.2rem;
+
+            display: flex;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .automaticLogin a #comercialLogo {
+            padding-right: 1.24rem;
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+
+        .automaticLogin a:first-child {
+            background: #1977f3;
+        }
+
+        .automaticLogin a:last-child {
+            padding-right: 6rem;
+            background: #ffffff;
+            color: #2b2b2b;
+        }
+
+        .automaticLogin a:hover {
+            filter: brightness(0.9);
+        }
+
+        p#or {
+            margin: 2rem auto 0;
+            height: 1rem;
+        }
+
+        label {
+            margin: 0 auto;
+
+            display: grid;
+            grid-template-rows: repeat(1, 1fr);
+            align-items: center;
+        }
+
+        label p {
+            margin: 0 auto 0 0;
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: #e74343;
+        }
+
+        label > input,
+        button {
+            padding: 0.1rem 0.2rem;
+            background: var(--background-grey);
+
+            border: 1px dotted var(--background-light-grey);
+            border-radius: 6px;
+            outline: 0;
+
+            font-size: 1rem;
+            font-weight: 400;
+
+            height: 2.2rem;
+            width: 21rem;
+        }
+
+        label input {
+            font-weight: 300;
+        }
+
+        button {
+            background: var(--background-black);
+            border: 0;
+            width: 21.5rem;
+        }
+        button:hover {
+            background: #161616;
+        }
+
+        p#justJoin {
+            margin: 2rem auto;
+        }
+        p#justJoin > a {
+            margin: 2rem 0;
+            padding: 0.5rem;
+            color: #5959ff;
+            text-decoration: underline;
+        }
+        p#justJoin > a:hover {
+            color: #2f86f7;
+        }
     }
 }

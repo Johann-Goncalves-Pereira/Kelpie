@@ -2,15 +2,12 @@ module Pages.Two exposing (..)
 
 -- import Browser.Navigation as Nav
 
-import Bitwise exposing (and)
-import Html exposing (Html, a, button, div, h2, i, img, input, label, map, p, span, text)
+import Html exposing (Html, a, button, div, h2, img, input, label, map, p, span, text)
 import Html.Attributes exposing (alt, class, id, minlength, name, src, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Regex
 import Route
 import Shared exposing (Model)
-import String exposing (join)
-import Url.Parser.Query exposing (int)
 
 
 
@@ -24,7 +21,6 @@ type alias Model =
     , emailError : String
     , passwordField : String
     , passwordError : Maybe String
-    , columns : List Int
     }
 
 
@@ -34,25 +30,31 @@ init =
     , emailError = ""
     , passwordField = ""
     , passwordError = Nothing
-    , columns = []
+    }
+
+
+type alias RegexModel =
+    { regularNumber : Regex.Regex
+    , regularCapitalLetters : Regex.Regex
+    , regularSymbols : Regex.Regex
+    }
+
+
+regularExpressionInit : RegexModel
+regularExpressionInit =
+    { regularNumber =
+        Maybe.withDefault Regex.never <|
+            Regex.fromString "\\d"
+    , regularCapitalLetters =
+        Maybe.withDefault Regex.never <|
+            Regex.fromString "[A-Z]"
+    , regularSymbols =
+        Maybe.withDefault Regex.never <|
+            Regex.fromString "[!@#$%*^~?]"
     }
 
 
 
--- type alias RegexModel =
---     { regularNumber : Regex.Regex
---     , character : Regex.Regex
---     }
-
-
-regularExpression : Regex.Regex
-regularExpression =
-    Maybe.withDefault Regex.never <|
-        Regex.fromString "\\d"
-
-
-
--- \\s!@#$%*+=^~?`´
 ---------
 -- Msg --
 ---------
@@ -62,6 +64,18 @@ type Msg
     = EmailField String
     | PasswordField String
     | GoToHomePage
+
+
+type Any value
+    = Some value
+    | Other value
+    | NoValue
+
+
+type alias Record =
+    { v1 : Any String
+    , v2 : Any Int
+    }
 
 
 
@@ -82,7 +96,7 @@ update msg model shared =
                         ""
 
                     else
-                        "Email Invalid"
+                        "Please place a valid Email"
             in
             ( { model
                 | emailField = email
@@ -102,10 +116,14 @@ update msg model shared =
             )
 
         GoToHomePage ->
-            ( model
-            , Route.pushUrl shared.key Route.Page1
-            , Shared.UserState True
-            )
+            if canSubmit model then
+                ( model
+                , Route.pushUrl shared.key Route.Page1
+                , Shared.UserState True
+                )
+
+            else
+                ( model, Cmd.none, Shared.NoOp )
 
 
 isEmailValid : String -> Bool
@@ -152,11 +170,20 @@ isPasswordValid password =
             String.length password
 
         -- takes number of characters on password and transform in a Int
-        numberValidation =
-            Regex.contains regularExpression password
+        capitalValidation =
+            Regex.contains
+                regularExpressionInit.regularCapitalLetters
+                password
 
-        -- charactersValidation =
-        --     Regex.contains regexInit.regularCharacter password
+        numberValidation =
+            Regex.contains
+                regularExpressionInit.regularNumber
+                password
+
+        symbolsValidation =
+            Regex.contains
+                regularExpressionInit.regularSymbols
+                password
     in
     if passwordLength == 0 then
         Just "The password field it's empty"
@@ -164,11 +191,30 @@ isPasswordValid password =
     else if passwordLength < 8 then
         Just "Password need to have at least 8 characters"
 
+    else if capitalValidation == False then
+        Just "Password need to have at least a capital letter"
+
     else if numberValidation == False then
         Just "Password need to have at least a number"
 
+    else if symbolsValidation == False then
+        Just "Password need to have at least a symbol like ( ! @ # $ % * ^ ~ ? )"
+
     else
         Nothing
+
+
+canSubmit : Model -> Bool
+canSubmit { emailField, passwordField } =
+    if
+        isEmailValid emailField
+            && isPasswordValid passwordField
+            == Nothing
+    then
+        True
+
+    else
+        False
 
 
 
@@ -252,7 +298,7 @@ viewPage model shared =
                         []
                     , passwordError
                     ]
-                , a [] [ text "Welcome Back" ]
+                , a [] [ text "WelcomeBack" ]
                 , button [ onClick GoToHomePage ] [ text "Submit" ]
                 , p [ id "justJoin" ]
                     [ text "Don't have an account?"
