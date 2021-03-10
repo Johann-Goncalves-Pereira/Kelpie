@@ -121,17 +121,17 @@ header {
     margin: auto 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
-}
-.currentPage > a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    list-style-type: none;
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        list-style-type: none;
 
-    pointer-events: none;
+        pointer-events: none;
 
-    color: var(--background-light);
+        color: var(--background-light);
+    }
 }
 
 .brands {
@@ -143,41 +143,44 @@ header {
     display: inline-block;
     font-size: 0.875rem;
     font-weight: 500;
-}
-.brands > a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    list-style-type: none;
 
-    color: var(--background-light);
-    text-decoration-color: var(--background-light);
-    height: 1rem;
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        list-style-type: none;
+
+        color: var(--background-light);
+        text-decoration-color: var(--background-light);
+        height: 1rem;
+
+        span {
+            position: relative;
+            top: -24px;
+            right: -24px;
+            font-size: 0.6rem;
+
+            color: transparent;
+
+            background-color: red;
+
+            background-image: linear-gradient(45deg, #ff0000, #2c33ff);
+
+            background-size: 100%;
+            background-repeat: repeat;
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+        }
+    }
 }
+
 .brands > a:hover {
     color: var(--background-white);
     cursor: pointer;
-}
-.brands > a span {
-    position: relative;
-    top: -24px;
-    right: -24px;
-    font-size: 0.6rem;
-
-    color: transparent;
-
-    background-color: red;
-
-    background-image: linear-gradient(45deg, #ff0000, #2c33ff);
-
-    background-size: 100%;
-    background-repeat: repeat;
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
 }
 
 // dots ...[list]
@@ -283,19 +286,18 @@ header {
     height: 2.5rem;
     border-radius: 50%;
 }
+$breakpoint-small-computer-screen: 1595px;
 
 $breakpoint-tiny-computer-screen: 950px;
-@media (max-width: $breakpoint-tiny-computer-screen) {
-    .brands,
-    .currentPage,
+@media only screen and (max-width: $breakpoint-tiny-computer-screen) {
     .rightHeader > button,
-    .usersStatus button:last-child {
+    // .usersStatus button:last-child,
+    .currentPage {
         display: none;
     }
 }
 
 // root of Tags
-$breakpoint-small-computer-screen: 1595px;
 
 #tags {
     display: flex;
@@ -356,6 +358,9 @@ h3#h3Tags {
         transition-duration: 2s;
         width: 0;
         height: 0;
+        display: none;
+    }
+    .brands {
         display: none;
     }
 }
