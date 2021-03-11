@@ -1,8 +1,9 @@
 module Pages.One exposing (..)
 
-import Html exposing (Html, a, button, div, form, h2, h3, h4, header, img, input, li, nav, span, text, ul)
+import Html exposing (Html, a, button, div, footer, form, h2, h3, h4, header, img, input, li, main_, nav, p, span, strong, text, ul)
 import Html.Attributes exposing (alt, class, href, id, placeholder, src, type_)
 import Html.Events exposing (onClick)
+import Pages.SubmitPhotos as SubmitPhotos
 import Route
 import Shared
 
@@ -15,6 +16,7 @@ import Shared
 
 type alias Model =
     { userSharedStatus : Bool
+    , submitPhotos : Maybe SubmitPhotos.Model
 
     --
     }
@@ -23,6 +25,7 @@ type alias Model =
 init : Model
 init =
     { userSharedStatus = False
+    , submitPhotos = Nothing
     }
 
 
@@ -33,7 +36,8 @@ init =
 
 
 type Msg
-    = GoToLogin
+    = SubmitPhotosMsg SubmitPhotos.Msg
+    | GoToLogin
 
 
 
@@ -45,6 +49,21 @@ type Msg
 update : Msg -> Model -> Shared.Model -> ( Model, Cmd Msg, Shared.Msg )
 update msg model shared =
     case msg of
+        SubmitPhotosMsg modalPhotoMsg ->
+            case model.submitPhotos of
+                Just submitPhotos ->
+                    let
+                        ( newSubmitPhotoModel, submitPhotoCmd ) =
+                            SubmitPhotos.update modalPhotoMsg submitPhotos
+                    in
+                    ( { model | submitPhotos = Just newSubmitPhotoModel }
+                    , Cmd.map SubmitPhotosMsg submitPhotoCmd
+                    , Shared.NoOp
+                    )
+
+                Nothing ->
+                    ( model, Cmd.none, Shared.NoOp )
+
         GoToLogin ->
             ( model, Route.pushUrl shared.key Route.Page2, Shared.NoOp )
 
@@ -136,32 +155,32 @@ headerPage model shared =
             ]
 
         -- Tags
-        , div [ id "tags" ]
-            [ h3 [ id "h3Tags" ] [ text "Tags" ]
-            , div [ class "verticalRight" ] []
+        , div [ class "tags" ]
+            [ h3 [] [ text "Tags" ]
+            , div [ class "separator" ] []
             , div [ class " tagsStyle" ]
-                [ ul [ class "ulTags" ]
-                    [ li [ class "liTag" ] [ a [ href "*/t/Wallpaper" ] [ text "Wallpaper" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/People" ] [ text "People" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Film" ] [ text "Film" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Movie" ] [ text "Movie" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Nature" ] [ text "Nature" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Dance" ] [ text "Dance" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Happy" ] [ text "Happy" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Food" ] [ text "Food" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Romance" ] [ text "Romance" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/History" ] [ text "History" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Culture" ] [ text "Culture" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Animals" ] [ text "Animals" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/LGBTQ" ] [ text "LGBTQ+" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Family" ] [ text "Family" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Meme" ] [ text "Meme" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Country" ] [ text "Country" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Offices" ] [ text "Offices" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Materialize" ] [ text "Materialize" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Art" ] [ text "Art" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/Draw" ] [ text "Draw" ] ]
-                    , li [ class "liTag" ] [ a [ href "*/t/text" ] [ text "Farm" ] ]
+                [ ul []
+                    [ li [] [ a [ href "*/t/Wallpaper" ] [ text "Wallpaper" ] ]
+                    , li [] [ a [ href "*/t/People" ] [ text "People" ] ]
+                    , li [] [ a [ href "*/t/Film" ] [ text "Film" ] ]
+                    , li [] [ a [ href "*/t/Movie" ] [ text "Movie" ] ]
+                    , li [] [ a [ href "*/t/Nature" ] [ text "Nature" ] ]
+                    , li [] [ a [ href "*/t/Dance" ] [ text "Dance" ] ]
+                    , li [] [ a [ href "*/t/Happy" ] [ text "Happy" ] ]
+                    , li [] [ a [ href "*/t/Food" ] [ text "Food" ] ]
+                    , li [] [ a [ href "*/t/Romance" ] [ text "Romance" ] ]
+                    , li [] [ a [ href "*/t/History" ] [ text "History" ] ]
+                    , li [] [ a [ href "*/t/Culture" ] [ text "Culture" ] ]
+                    , li [] [ a [ href "*/t/Animals" ] [ text "Animals" ] ]
+                    , li [] [ a [ href "*/t/LGBTQ" ] [ text "LGBTQ+" ] ]
+                    , li [] [ a [ href "*/t/Family" ] [ text "Family" ] ]
+                    , li [] [ a [ href "*/t/Meme" ] [ text "Meme" ] ]
+                    , li [] [ a [ href "*/t/Country" ] [ text "Country" ] ]
+                    , li [] [ a [ href "*/t/Offices" ] [ text "Offices" ] ]
+                    , li [] [ a [ href "*/t/Materialize" ] [ text "Materialize" ] ]
+                    , li [] [ a [ href "*/t/Art" ] [ text "Art" ] ]
+                    , li [] [ a [ href "*/t/Draw" ] [ text "Draw" ] ]
+                    , li [] [ a [ href "*/t/text" ] [ text "Farm" ] ]
                     ]
                 ]
             ]
@@ -185,7 +204,7 @@ sharedStatus model shared =
 
 imageDisplay : Model -> Html Msg
 imageDisplay model =
-    div [ class "imgContainer" ]
+    main_ [ class "imgContainer" ]
         [ div [ class "imgGrid" ]
             [ div [ class "imgColumns" ]
                 --  I need to make this three columns torn in to 2 and 1
