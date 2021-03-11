@@ -66,21 +66,7 @@ type Msg
     | GoToHomePage
 
 
-type Any value
-    = Some value
-    | Other value
-    | NoValue
 
-
-type alias Record =
-    { v1 : Any String
-    , v2 : Any Int
-    }
-
-
-
--- type ErrorMsg
---     = PasswordError Maybe String
 ------------
 -- Update --
 ------------
@@ -255,23 +241,24 @@ viewPage model shared =
                     ]
                 , div
                     [ class "automaticLogin"
-                    , class "grid-row"
                     ]
                     [ a []
-                        [ img
-                            [ id "comercialLogo"
-                            , src "source/facebook.svg"
+                        [ div []
+                            [ img
+                                [ src "source/facebook.svg"
+                                ]
+                                []
+                            , text "Login with Facebook"
                             ]
-                            []
-                        , text "Login with Facebook"
                         ]
                     , a []
-                        [ img
-                            [ id "comercialLogo"
-                            , src "source/google.svg"
+                        [ div []
+                            [ img
+                                [ src "source/google.svg"
+                                ]
+                                []
+                            , text "Login with Google"
                             ]
-                            []
-                        , text "Login with Google"
                         ]
                     ]
                 , p [ id "or" ] [ text "or" ]
